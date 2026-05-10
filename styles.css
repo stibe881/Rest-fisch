@@ -876,13 +876,13 @@ a:hover { color: var(--orange); }
 
 .menu-pages-track {
   display: flex;
-  width: 600%;            /* 6 pages × 100% each */
+  width: 700%;            /* 7 pages × 100% each (cover + 6 menu pages) */
   transition: transform 1s cubic-bezier(.68,.05,.32,1);
   will-change: transform;
 }
 
 .menu-page-card {
-  flex: 0 0 calc(100% / 6);
+  flex: 0 0 calc(100% / 7);
   position: relative;
   padding: 2.4rem 2rem 2.6rem;
   min-height: 580px;
@@ -1049,6 +1049,144 @@ a:hover { color: var(--orange); }
   min-width: 12px;
 }
 .menu-page-card .variants .price { font-size: .9rem; }
+
+/* ---------- Cover page (first page of the booklet) ---------- */
+.menu-page-card--cover {
+  padding: 2rem 1.6rem;
+}
+.menu-page-card--cover .page-paper {
+  flex: 1 1 auto;
+  display: flex;
+}
+.cover-frame {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.4rem;
+  border: 1px solid rgba(232,93,44,0.22);
+  border-radius: 3px;
+  position: relative;
+  background:
+    radial-gradient(ellipse at top, rgba(255,255,255,0.4), transparent 60%),
+    linear-gradient(180deg, transparent, rgba(232,93,44,0.04));
+}
+/* Decorative inner shadow corner detail */
+.cover-frame::before,
+.cover-frame::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 1px solid rgba(232,93,44,0.4);
+}
+.cover-frame::before { top: 6px; left: 6px;   border-right: 0; border-bottom: 0; }
+.cover-frame::after  { bottom: 6px; right: 6px; border-left: 0;  border-top: 0; }
+
+.cover-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: .65rem;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.6rem;
+}
+
+.cover-emblem {
+  margin-bottom: 1.4rem;
+  filter: drop-shadow(0 4px 12px rgba(42,45,124,0.15));
+}
+.cover-emblem img {
+  width: 110px;
+  height: auto;
+  display: block;
+}
+
+.cover-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--orange), transparent);
+  margin: 1rem auto;
+  position: relative;
+}
+.cover-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 5px; height: 5px;
+  background: var(--orange);
+  border-radius: 1px;
+}
+
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+  line-height: 1;
+  color: var(--navy);
+  text-transform: lowercase;
+  letter-spacing: -.005em;
+  margin: 0;
+}
+.cover-title em {
+  font-family: 'Pacifico', cursive;
+  font-style: normal;
+  font-weight: 400;
+  color: var(--orange);
+  font-size: 1em;
+  letter-spacing: 0;
+  display: inline-block;
+  margin-left: .12em;
+  transform: rotate(-3deg);
+}
+
+.cover-welcome {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: .96rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 320px;
+  margin: 1.2rem auto .6rem;
+}
+
+.cover-signature {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.25rem;
+  color: var(--orange);
+  margin-top: 1rem;
+  position: relative;
+  display: inline-block;
+}
+.cover-signature::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--orange);
+  opacity: .55;
+  margin: .5rem auto 0;
+}
+
+/* Cover page-num is the ornament; muted */
+.menu-page-card--cover .page-num {
+  font-family: serif;
+  font-size: 1rem;
+  opacity: .6;
+}
+
+@media (max-width: 600px) {
+  .menu-page-card--cover { padding: 1.4rem 1rem; }
+  .cover-frame { padding: 1.5rem 1rem; }
+  .cover-emblem img { width: 84px; }
+  .cover-title { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+  .cover-welcome { font-size: .88rem; max-width: 270px; }
+  .cover-signature { font-size: 1.1rem; }
+}
 
 /* ---------- Info page (declaration + suppliers) ---------- */
 .menu-page-card--info .declaration {

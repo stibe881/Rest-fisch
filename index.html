@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=11" />
+  <link rel="stylesheet" href="styles.css?v=12" />
 </head>
 <body>
 
@@ -162,10 +162,6 @@
     <div class="card-stage">
       <p class="kicker" data-reveal>— Speisekarte 2025</p>
       <h2 class="display" data-reveal data-delay="100">Aus der <em>Küche</em></h2>
-      <p class="lead" data-reveal data-delay="220">
-        Herzlich willkommen im Fisch — gerne verwöhnen wir Sie in unserem schönen Ambiente.<br/>
-        <em class="signature">Ihr Fisch-Team</em>
-      </p>
 
       <div class="booklet">
         <button class="flip-btn flip-prev" type="button" aria-label="Vorherige Seite">
@@ -177,7 +173,28 @@
             <div class="menu-pages-track">
 
               <!-- ─── Page 1: Vorspeisen ─── -->
-              <article class="menu-page-card" data-page="0" data-title="Vorspeisen">
+              <!-- Cover -->
+              <article class="menu-page-card menu-page-card--cover" data-page="0" data-title="Speisekarte 2025">
+                <div class="page-paper page-cover">
+                  <div class="cover-frame">
+                    <p class="cover-eyebrow">Saison · 2025</p>
+                    <div class="cover-emblem">
+                      <img src="assets/logo.png" alt="" />
+                    </div>
+                    <div class="cover-divider" aria-hidden="true"></div>
+                    <h2 class="cover-title">Speise<em>karte</em></h2>
+                    <div class="cover-divider" aria-hidden="true"></div>
+                    <p class="cover-welcome">
+                      Herzlich willkommen im Fisch.<br/>
+                      Gerne verwöhnen wir Sie in unserem schönen Ambiente.
+                    </p>
+                    <p class="cover-signature">Ihr Fisch-Team</p>
+                  </div>
+                </div>
+                <span class="page-num">❦</span>
+              </article>
+
+              <article class="menu-page-card" data-page="1" data-title="Vorspeisen">
                 <div class="page-paper">
                   <header class="menu-section-head">
                     <span class="ornament-line"></span>
@@ -213,7 +230,7 @@
               </article>
 
               <!-- ─── Page 2: vom Schwein ─── -->
-              <article class="menu-page-card" data-page="1" data-title="vom Schwein">
+              <article class="menu-page-card" data-page="2" data-title="vom Schwein">
                 <div class="page-paper">
                   <header class="menu-section-head">
                     <span class="ornament-line"></span>
@@ -265,7 +282,7 @@
               </article>
 
               <!-- ─── Page 3: vom Poulet ─── -->
-              <article class="menu-page-card" data-page="2" data-title="vom Poulet">
+              <article class="menu-page-card" data-page="3" data-title="vom Poulet">
                 <div class="page-paper">
                   <header class="menu-section-head">
                     <span class="ornament-line"></span>
@@ -302,7 +319,7 @@
               </article>
 
               <!-- ─── Page 4: vom Rind & vom Fisch ─── -->
-              <article class="menu-page-card" data-page="3" data-title="vom Rind & vom Fisch">
+              <article class="menu-page-card" data-page="4" data-title="vom Rind & vom Fisch">
                 <div class="page-paper">
                   <header class="menu-section-head">
                     <span class="ornament-line"></span>
@@ -348,7 +365,7 @@
               </article>
 
               <!-- ─── Page 5: Röschti & Vegetarisch ─── -->
-              <article class="menu-page-card" data-page="4" data-title="Röschti & Vegetarisch">
+              <article class="menu-page-card" data-page="5" data-title="Röschti & Vegetarisch">
                 <div class="page-paper">
                   <header class="menu-section-head">
                     <span class="ornament-line"></span>
@@ -389,7 +406,7 @@
               </article>
 
               <!-- ─── Page 6: Herkunft & Lieferanten ─── -->
-              <article class="menu-page-card menu-page-card--info" data-page="5" data-title="Herkunft &amp; Lieferanten">
+              <article class="menu-page-card menu-page-card--info" data-page="6" data-title="Herkunft &amp; Lieferanten">
                 <div class="page-paper">
                   <header class="menu-section-head">
                     <span class="ornament-line"></span>
@@ -436,15 +453,16 @@
 
       <nav class="menu-pager" aria-label="Seiten der Speisekarte">
         <div class="page-dots" role="tablist">
-          <button class="page-dot is-active" type="button" data-page="0" aria-label="Vorspeisen"></button>
-          <button class="page-dot" type="button" data-page="1" aria-label="vom Schwein"></button>
-          <button class="page-dot" type="button" data-page="2" aria-label="vom Poulet"></button>
-          <button class="page-dot" type="button" data-page="3" aria-label="vom Rind &amp; vom Fisch"></button>
-          <button class="page-dot" type="button" data-page="4" aria-label="Röschti &amp; Vegetarisch"></button>
-          <button class="page-dot" type="button" data-page="5" aria-label="Herkunft &amp; Lieferanten"></button>
+          <button class="page-dot is-active" type="button" data-page="0" aria-label="Titel"></button>
+          <button class="page-dot" type="button" data-page="1" aria-label="Vorspeisen"></button>
+          <button class="page-dot" type="button" data-page="2" aria-label="vom Schwein"></button>
+          <button class="page-dot" type="button" data-page="3" aria-label="vom Poulet"></button>
+          <button class="page-dot" type="button" data-page="4" aria-label="vom Rind &amp; vom Fisch"></button>
+          <button class="page-dot" type="button" data-page="5" aria-label="Röschti &amp; Vegetarisch"></button>
+          <button class="page-dot" type="button" data-page="6" aria-label="Herkunft &amp; Lieferanten"></button>
         </div>
         <div class="page-meta">
-          <span class="page-counter"><span class="page-current">1</span><span class="page-divider"> / </span><span class="page-total">6</span></span>
+          <span class="page-counter"><span class="page-current">1</span><span class="page-divider"> / </span><span class="page-total">7</span></span>
           <span class="page-title">Vorspeisen</span>
         </div>
       </nav>
@@ -806,6 +824,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=11"></script>
+  <script src="script.js?v=12"></script>
 </body>
 </html>
