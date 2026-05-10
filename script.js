@@ -39,7 +39,7 @@
   }));
 
   const depthStacks = Array.from(document.querySelectorAll('.depth-stack'));
-  const heroLogo    = document.querySelector('.hero-logo');
+  const heroTitle   = document.querySelector('.hero-title');
   const heroSection = document.getElementById('hero');
 
   let scrollY = window.scrollY;
@@ -110,15 +110,15 @@
       if (front) front.style.transform = `translate3d(${(t - .5) * 22}px, ${(t - .5) * 50}px, 0) scale(${1 + t * 0.04})`;
     });
 
-    /* --- Hero logo: zoom + parallax-out as you scroll -------- */
-    if (heroSection && heroLogo) {
+    /* --- Hero title: zoom + parallax-out as you scroll ------- */
+    if (heroSection && heroTitle) {
       const rect = heroSection.getBoundingClientRect();
       const p = Math.min(1, Math.max(0, -rect.top / rect.height));
-      const scale = 1 + p * 0.5;
-      const ty    = -p * 100;
-      const op    = 1 - p * 1.4;
-      heroLogo.style.transform = `translate3d(0, ${ty}px, 0) scale(${scale})`;
-      heroLogo.style.opacity = Math.max(0, op);
+      const scale = 1 + p * 0.35;
+      const ty    = -p * 90;
+      const op    = 1 - p * 1.5;
+      heroTitle.style.transform = `translate3d(0, ${ty}px, 0) scale(${scale})`;
+      heroTitle.style.opacity = Math.max(0, op);
     }
 
     ticking = false;
