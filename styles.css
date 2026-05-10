@@ -845,6 +845,7 @@ a:hover { color: var(--orange); }
   position: relative;
   overflow: hidden;
   width: 100%;
+  height: clamp(420px, 70vh, 780px);   /* fluid height — booklet adapts to viewport */
   border-radius: 4px;
   background: linear-gradient(135deg, #fbf5e6 0%, #f5e9c8 100%);
   box-shadow:
@@ -877,22 +878,36 @@ a:hover { color: var(--orange); }
 .menu-pages-track {
   display: flex;
   width: 700%;            /* 7 pages × 100% each (cover + 6 menu pages) */
+  height: 100%;           /* fill the responsive viewport height */
   transition: transform 1s cubic-bezier(.68,.05,.32,1);
   will-change: transform;
 }
 
 .menu-page-card {
   flex: 0 0 calc(100% / 7);
+  height: 100%;           /* each page fills the booklet height */
   position: relative;
-  padding: clamp(1.4rem, 3vw, 2.8rem) clamp(.9rem, 2.4vw, 2.2rem) clamp(1.6rem, 3vw, 2.8rem);
-  min-height: clamp(420px, 64vh, 660px);
+  padding: clamp(1.2rem, 3vw, 2.6rem) clamp(.9rem, 2.4vw, 2.2rem) clamp(1.4rem, 3vw, 2.6rem);
   display: flex;
   flex-direction: column;
 }
 .page-paper {
   flex: 1 1 auto;
+  min-height: 0;          /* allow flex child to shrink below content */
   text-align: left;
+  overflow-y: auto;       /* scrolls inside the page when content overflows */
+  overflow-x: hidden;
+  padding-right: .35rem;  /* breathing room around the scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(232,93,44,0.3) transparent;
 }
+.page-paper::-webkit-scrollbar { width: 5px; }
+.page-paper::-webkit-scrollbar-track { background: transparent; }
+.page-paper::-webkit-scrollbar-thumb {
+  background: rgba(232,93,44,0.3);
+  border-radius: 3px;
+}
+.page-paper::-webkit-scrollbar-thumb:hover { background: rgba(232,93,44,0.55); }
 .page-num {
   position: absolute;
   bottom: 1rem; right: 1.4rem;
@@ -1052,11 +1067,13 @@ a:hover { color: var(--orange); }
 
 /* ---------- Cover page (first page of the booklet) ---------- */
 .menu-page-card--cover {
-  padding: 2rem 1.6rem;
+  padding: clamp(1.2rem, 3vw, 2rem) clamp(.9rem, 2.4vw, 1.8rem);
 }
 .menu-page-card--cover .page-paper {
   flex: 1 1 auto;
   display: flex;
+  overflow: hidden;        /* cover never scrolls — content is centered */
+  padding-right: 0;
 }
 .cover-frame {
   flex: 1 1 auto;
