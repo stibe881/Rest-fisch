@@ -268,6 +268,51 @@
   }
 
   /* -----------------------------------------------------------
+   * 6b. Legal modals (Impressum / Datenschutz)
+   * --------------------------------------------------------- */
+  const modalTriggers = document.querySelectorAll('[data-modal]');
+  const modals = document.querySelectorAll('.modal');
+
+  function openModal(id) {
+    const m = document.getElementById('modal-' + id);
+    if (!m) return;
+    m.hidden = false;
+    document.body.classList.add('modal-open');
+    // Focus the close button after transition for accessibility
+    requestAnimationFrame(() => {
+      const close = m.querySelector('.modal-close');
+      if (close) close.focus();
+    });
+  }
+  function closeModal(m) {
+    if (!m) return;
+    m.hidden = true;
+    if (!document.querySelector('.modal:not([hidden])')) {
+      document.body.classList.remove('modal-open');
+    }
+  }
+  function closeAllModals() {
+    modals.forEach((m) => closeModal(m));
+  }
+
+  modalTriggers.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const id = btn.dataset.modal;
+      if (id) { e.preventDefault(); openModal(id); }
+    });
+  });
+  modals.forEach((m) => {
+    m.querySelectorAll('[data-modal-close]').forEach((el) => {
+      el.addEventListener('click', () => closeModal(m));
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.querySelector('.modal:not([hidden])')) {
+      closeAllModals();
+    }
+  });
+
+  /* -----------------------------------------------------------
    * 7. Reservation form — mailto handoff
    * --------------------------------------------------------- */
   const resForm = document.querySelector('.reservation-form');

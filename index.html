@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=7" />
+  <link rel="stylesheet" href="styles.css?v=8" />
 </head>
 <body>
 
@@ -617,9 +617,163 @@
   </section>
 
   <footer class="foot">
-    <p>© <span id="year"></span> Restaurant Fisch Fischbach · Hauptstrasse 9, 6145 Fischbach</p>
+    <div class="foot-inner">
+      <p>© <span id="year"></span> Restaurant Fisch Fischbach · Hauptstrasse 9, 6145 Fischbach</p>
+      <ul class="foot-links">
+        <li><button type="button" class="foot-link" data-modal="impressum">Impressum</button></li>
+        <li><button type="button" class="foot-link" data-modal="datenschutz">Datenschutz</button></li>
+      </ul>
+    </div>
   </footer>
 
-  <script src="script.js?v=7"></script>
+  <!-- ===== Impressum modal ===== -->
+  <div class="modal" id="modal-impressum" hidden role="dialog" aria-modal="true" aria-labelledby="impressum-title">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-card" role="document">
+      <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+      <div class="modal-content">
+        <p class="kicker">— Rechtliches</p>
+        <h2 class="display" id="impressum-title">Impressum</h2>
+
+        <p class="legal-lead">Angaben gemäss schweizerischem Recht.</p>
+
+        <h3>Betreiber</h3>
+        <p>
+          Restaurant Fisch<br/>
+          Roger Giger &amp; Fisch-Team<br/>
+          Hauptstrasse 9<br/>
+          6145 Fischbach<br/>
+          Schweiz
+        </p>
+
+        <h3>Kontakt</h3>
+        <p>
+          Telefon: <a href="tel:+41796363281">079 636 32 81</a><br/>
+          E-Mail: <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a><br/>
+          Web: <a href="https://fischfischbach.ch" target="_blank" rel="noopener">fischfischbach.ch</a>
+        </p>
+
+        <h3>Verantwortlich für den Inhalt</h3>
+        <p>Roger Giger, Hauptstrasse 9, 6145 Fischbach.</p>
+
+        <h3>Haftung für Inhalte</h3>
+        <p>
+          Die Inhalte dieser Website wurden mit grösster Sorgfalt erstellt.
+          Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können
+          wir jedoch keine Gewähr übernehmen. Preise, Öffnungszeiten und
+          Speisekarte können sich kurzfristig ändern.
+        </p>
+
+        <h3>Haftung für Links</h3>
+        <p>
+          Diese Website enthält Links zu externen Websites Dritter, auf deren
+          Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten
+          Seiten ist stets der jeweilige Anbieter verantwortlich. Zum Zeitpunkt
+          der Verlinkung wurden die fremden Inhalte auf mögliche Rechtsverstösse
+          überprüft.
+        </p>
+
+        <h3>Urheberrecht</h3>
+        <p>
+          Die durch den Betreiber erstellten Inhalte und Werke auf dieser Website
+          unterliegen dem schweizerischen Urheberrecht. Vervielfältigung,
+          Bearbeitung, Verbreitung und jede Art der Verwertung ausserhalb der
+          Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des
+          jeweiligen Autors bzw. Erstellers.
+        </p>
+
+        <h3>Bildnachweise</h3>
+        <p>
+          Logo und Aussenaufnahme: Restaurant Fisch Fischbach.
+          Sfeerbilder: Unsplash (lizenzfrei).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Datenschutz modal ===== -->
+  <div class="modal" id="modal-datenschutz" hidden role="dialog" aria-modal="true" aria-labelledby="datenschutz-title">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-card" role="document">
+      <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+      <div class="modal-content">
+        <p class="kicker">— Rechtliches</p>
+        <h2 class="display" id="datenschutz-title">Datenschutz&shy;erklärung</h2>
+
+        <p class="legal-lead">
+          Wir nehmen den Schutz Ihrer persönlichen Daten ernst. Diese
+          Datenschutzerklärung informiert Sie darüber, wie wir mit Ihren Daten
+          umgehen. Wir halten uns an das schweizerische Bundesgesetz über den
+          Datenschutz (DSG).
+        </p>
+
+        <h3>Verantwortliche Stelle</h3>
+        <p>
+          Restaurant Fisch · Roger Giger<br/>
+          Hauptstrasse 9, 6145 Fischbach<br/>
+          <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a> ·
+          <a href="tel:+41796363281">079 636 32 81</a>
+        </p>
+
+        <h3>Erhebung beim Besuch der Website</h3>
+        <p>
+          Bei jedem Aufruf werden vom Server automatisch technische
+          Informationen wie IP-Adresse, Datum und Uhrzeit des Zugriffs sowie
+          verwendeter Browser temporär gespeichert. Diese Daten dienen
+          ausschliesslich dem stabilen Betrieb der Website und werden nicht
+          zur Identifikation einzelner Personen verwendet.
+        </p>
+
+        <h3>Reservationsformular</h3>
+        <p>
+          Wenn Sie eine Reservation per Formular anfragen, übermitteln Sie uns
+          folgende Angaben: Name, Telefonnummer, E-Mail-Adresse, Datum, Uhrzeit,
+          Personenzahl und allfällige Bemerkungen. Diese Daten werden
+          ausschliesslich zur Bearbeitung Ihrer Anfrage verwendet, per E-Mail an
+          <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a>
+          übermittelt und nicht an Dritte weitergegeben. Wir bewahren die
+          Anfrage so lange auf, wie sie für die Reservation erforderlich ist.
+        </p>
+
+        <h3>Cookies</h3>
+        <p>
+          Diese Website setzt derzeit keine Tracking- oder Marketing-Cookies
+          ein. Sollte sich das in Zukunft ändern, informieren wir Sie an dieser
+          Stelle und holen Ihre Einwilligung ein.
+        </p>
+
+        <h3>Schriftarten und externe Inhalte</h3>
+        <p>
+          Wir verwenden Webfonts von Google Fonts. Beim Laden der Seite werden
+          Schriften vom Server von Google bezogen, wobei Ihre IP-Adresse
+          verarbeitet wird. Weitere Informationen finden Sie in der
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.
+          Sfeerbilder werden teilweise über Unsplash geladen.
+        </p>
+
+        <h3>Ihre Rechte</h3>
+        <p>
+          Sie haben jederzeit das Recht auf Auskunft über die zu Ihrer Person
+          gespeicherten Daten, auf Berichtigung unrichtiger Daten sowie auf
+          Löschung. Wenden Sie sich dafür formlos per E-Mail an
+          <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a>.
+        </p>
+
+        <h3>Änderungen</h3>
+        <p>
+          Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie
+          stets den aktuellen rechtlichen Anforderungen entspricht.
+        </p>
+
+        <p class="legal-meta">Stand: 10. Mai 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=8"></script>
 </body>
 </html>
