@@ -27,13 +27,14 @@
       <li><a href="#menu">Angebot</a></li>
       <li><a href="#speisekarte">Speisekarte</a></li>
       <li><a href="#hours">Öffnungszeiten</a></li>
+      <li><a href="#reservation">Reservation</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
   </nav>
 
   <!-- ==================== SCENE 1 — HERO ==================== -->
   <section id="hero" class="scene scene-hero">
-    <div class="layer layer-bg" data-speed="0.15" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2400&q=80')"></div>
+    <div class="layer layer-bg" data-speed="0.15" style="background-image:url('assets/haus.jpg')"></div>
     <div class="layer layer-mid" data-speed="0.35" aria-hidden="true">
       <svg viewBox="0 0 1440 600" preserveAspectRatio="none">
         <path d="M0,420 C240,360 480,500 720,440 C960,380 1200,500 1440,420 L1440,600 L0,600 Z" fill="rgba(8,28,42,0.45)"/>
@@ -147,7 +148,7 @@
     </div>
   </section>
 
-  <!-- ==================== SCENE 4b — SPEISEKARTE ==================== -->
+  <!-- ==================== SCENE 4b — SPEISEKARTE (flippable booklet) ==================== -->
   <section id="speisekarte" class="scene scene-card">
     <div class="card-grain" aria-hidden="true"></div>
     <div class="card-stage">
@@ -158,399 +159,294 @@
         <em class="signature">Ihr Fisch-Team</em>
       </p>
 
-      <article class="menu-card" data-reveal data-delay="380">
-        <div class="menu-card-inner">
+      <div class="booklet" data-reveal data-delay="340">
+        <button class="flip-btn flip-prev" type="button" aria-label="Vorherige Seite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
 
-          <!-- LEFT PAGE -->
-          <div class="menu-page menu-page-left">
+        <article class="menu-card" tabindex="0">
+          <div class="menu-pages-viewport">
+            <div class="menu-pages-track">
 
-            <section class="menu-section">
-              <header class="menu-section-head">
-                <span class="ornament-line"></span>
-                <h3>Vorspeisen</h3>
-                <span class="ornament-line"></span>
-              </header>
-              <ul class="menu-list">
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Knackiger Blattsalat</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">8.00</span>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Gemischter bunter Salat</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">10.00</span>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Salatteller garniert mit Früchten</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">19.50</span>
-                  </div>
-                  <p class="dish-desc">Dressing: französisch · italienisch · Honig-Senf</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Bouillon mit Flädli</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">9.00</span>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Kokos-Zitronengrassuppe</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">10.00</span>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Faustbrot</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">8.50</span>
-                  </div>
-                  <p class="dish-desc">Schinken · Salami · Käse</p>
-                </li>
-                <li class="menu-item menu-item--variants">
-                  <div class="menu-item-row">
-                    <span class="dish">Beefsteak Tatar mit Butter-Toast</span>
-                  </div>
-                  <p class="dish-desc">mild · mittelscharf · scharf</p>
-                  <ul class="variants">
-                    <li><span class="size">klein</span><span class="vleader" aria-hidden="true"></span><span class="price">26.00</span></li>
-                    <li><span class="size">gross</span><span class="vleader" aria-hidden="true"></span><span class="price">34.00</span></li>
+              <!-- ─── Page 1: Vorspeisen ─── -->
+              <article class="menu-page-card" data-page="0" data-title="Vorspeisen">
+                <div class="page-paper">
+                  <header class="menu-section-head">
+                    <span class="ornament-line"></span>
+                    <h3>Vorspeisen</h3>
+                    <span class="ornament-line"></span>
+                  </header>
+                  <ul class="menu-list">
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Knackiger Blattsalat</span><span class="leader" aria-hidden="true"></span><span class="price">8.00</span></div></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Gemischter bunter Salat</span><span class="leader" aria-hidden="true"></span><span class="price">10.00</span></div></li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Salatteller garniert mit Früchten</span><span class="leader" aria-hidden="true"></span><span class="price">19.50</span></div>
+                      <p class="dish-desc">Dressing: französisch · italienisch · Honig-Senf</p>
+                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Bouillon mit Flädli</span><span class="leader" aria-hidden="true"></span><span class="price">9.00</span></div></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Kokos-Zitronengrassuppe</span><span class="leader" aria-hidden="true"></span><span class="price">10.00</span></div></li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Faustbrot</span><span class="leader" aria-hidden="true"></span><span class="price">8.50</span></div>
+                      <p class="dish-desc">Schinken · Salami · Käse</p>
+                    </li>
+                    <li class="menu-item menu-item--variants">
+                      <div class="menu-item-row"><span class="dish">Beefsteak Tatar mit Butter-Toast</span></div>
+                      <p class="dish-desc">mild · mittelscharf · scharf</p>
+                      <ul class="variants">
+                        <li><span class="size">klein</span><span class="vleader" aria-hidden="true"></span><span class="price">26.00</span></li>
+                        <li><span class="size">gross</span><span class="vleader" aria-hidden="true"></span><span class="price">34.00</span></li>
+                      </ul>
+                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Pommes-frites — kleine Portion</span><span class="leader" aria-hidden="true"></span><span class="price">7.00</span></div></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Pommes-frites — Portion</span><span class="leader" aria-hidden="true"></span><span class="price">9.50</span></div></li>
                   </ul>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Pommes-frites — kleine Portion</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">7.00</span>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Pommes-frites — Portion</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">9.50</span>
-                  </div>
-                </li>
-              </ul>
-            </section>
+                </div>
+                <span class="page-num">1</span>
+              </article>
 
-            <section class="menu-section">
-              <header class="menu-section-head">
-                <span class="ornament-line"></span>
-                <h3>vom Fisch</h3>
-                <span class="ornament-line"></span>
-              </header>
-              <ul class="menu-list">
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Lachsforelle gebraten · Zitronenbutter</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">35.50</span>
-                  </div>
-                  <p class="dish-desc">auf Weissweinrisotto · Gemüse</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Hausgemachte Zanderknusperli · Tartarsauce</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">28.50</span>
-                  </div>
-                  <p class="dish-desc">Pommes-frites · Gemüse oder als Fitnessteller</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Black Tiger (Riesencrevetten)</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">33.00</span>
-                  </div>
-                  <p class="dish-desc">Nudeln · Dörrtomaten · Spinat · Zwiebeln · Knoblauch · Olivenöl · Sambal · Parmesan</p>
-                </li>
-              </ul>
-            </section>
+              <!-- ─── Page 2: vom Schwein ─── -->
+              <article class="menu-page-card" data-page="1" data-title="vom Schwein">
+                <div class="page-paper">
+                  <header class="menu-section-head">
+                    <span class="ornament-line"></span>
+                    <h3>vom Schwein</h3>
+                    <span class="ornament-line"></span>
+                  </header>
+                  <ul class="menu-list">
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Schnitzel paniert</span><span class="leader" aria-hidden="true"></span><span class="price">25.50</span></div>
+                      <p class="dish-desc">Pommes-frites · Gemüse</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Roger&rsquo;s Schnitzel paniert</span><span class="leader" aria-hidden="true"></span><span class="price">37.50</span></div>
+                      <p class="dish-desc">Champignonsauce · Tomaten und Käse überbacken · Pommes-frites · Gemüse</p>
+                    </li>
+                    <li class="menu-item menu-item--variants">
+                      <div class="menu-item-row"><span class="dish">Cordon bleu</span></div>
+                      <p class="dish-desc">gefüllt mit Schinken und Käse · Pommes-frites · Gemüse</p>
+                      <ul class="variants">
+                        <li><span class="size">700 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">38.50</span></li>
+                        <li><span class="size">500 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">36.50</span></li>
+                        <li><span class="size">250 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">32.50</span></li>
+                      </ul>
+                    </li>
+                    <li class="menu-item menu-item--variants">
+                      <div class="menu-item-row"><span class="dish">Cordon bleu Haus-Art</span></div>
+                      <p class="dish-desc">mit Café de Paris · Schinken &amp; Käse · Pommes-frites · Gemüse</p>
+                      <ul class="variants">
+                        <li><span class="size">700 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">40.50</span></li>
+                        <li><span class="size">500 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">38.50</span></li>
+                        <li><span class="size">250 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">34.50</span></li>
+                      </ul>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Schweinssteak Kräuterbutter — 250 gr</span><span class="leader" aria-hidden="true"></span><span class="price">28.50</span></div>
+                      <p class="dish-desc">Pommes-frites · Gemüse oder Fitness-Teller</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Schweins Rahmschnitzel</span><span class="leader" aria-hidden="true"></span><span class="price">28.50</span></div>
+                      <p class="dish-desc">Champignon-Rahmsauce · Nudeln · Gemüse</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Bauernbratwurst — 180 gr</span><span class="leader" aria-hidden="true"></span><span class="price">22.50</span></div>
+                      <p class="dish-desc">Zwiebelsauce · Butter-Rösti · Gemüse</p>
+                    </li>
+                  </ul>
+                </div>
+                <span class="page-num">2</span>
+              </article>
 
-            <section class="menu-section">
-              <header class="menu-section-head">
-                <span class="ornament-line"></span>
-                <h3>Röschti esch&rsquo;s Gröschti</h3>
-                <span class="ornament-line"></span>
-              </header>
-              <ul class="menu-list">
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Älpler-Rösti</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">23.50</span>
-                  </div>
-                  <p class="dish-desc">Schinken · Käse · Spiegelei</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Rösti — 2 Stk. Spiegelei</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">20.50</span>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Gemüse-Rösti</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">22.50</span>
-                  </div>
-                  <p class="dish-desc">Käse · Spiegelei</p>
-                </li>
-              </ul>
-            </section>
+              <!-- ─── Page 3: vom Poulet ─── -->
+              <article class="menu-page-card" data-page="2" data-title="vom Poulet">
+                <div class="page-paper">
+                  <header class="menu-section-head">
+                    <span class="ornament-line"></span>
+                    <h3>vom Poulet</h3>
+                    <span class="ornament-line"></span>
+                  </header>
+                  <ul class="menu-list">
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Leckere Poulet-Flügeli — 6 Stk.</span><span class="leader" aria-hidden="true"></span><span class="price">17.50</span></div>
+                      <p class="dish-desc">mit Haussauce</p>
+                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">… mit Pommes-frites</span><span class="leader" aria-hidden="true"></span><span class="price">22.50</span></div></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Poulet-Flügeli pro Stück</span><span class="leader" aria-hidden="true"></span><span class="price">2.60</span></div></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Haussauce</span><span class="leader" aria-hidden="true"></span><span class="price">2.50</span></div></li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Chicken Nuggets — 10 Stk.</span><span class="leader" aria-hidden="true"></span><span class="price">18.00</span></div>
+                      <p class="dish-desc">mit Pommes-frites</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Poulet-Brust Kräuterschaum</span><span class="leader" aria-hidden="true"></span><span class="price">27.50</span></div>
+                      <p class="dish-desc">Pommes-frites · Gemüse</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Poulet Cordon bleu</span><span class="leader" aria-hidden="true"></span><span class="price">34.50</span></div>
+                      <p class="dish-desc">Schinken &amp; Käse · Pommes-frites · Gemüse</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Poulet-Brust im Speckmantel</span><span class="leader" aria-hidden="true"></span><span class="price">36.50</span></div>
+                      <p class="dish-desc">Brie · Rohschinken &amp; Dörrtomaten · Pommes-frites · Gemüse</p>
+                    </li>
+                  </ul>
+                </div>
+                <span class="page-num">3</span>
+              </article>
 
-            <section class="menu-section">
-              <header class="menu-section-head">
-                <span class="ornament-line"></span>
-                <h3>Vegetarisch</h3>
-                <span class="ornament-line"></span>
-              </header>
-              <ul class="menu-list">
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Gemüseteller mit Kroketten</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">25.50</span>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Frühlingsrollen mit Sweet &amp; Chilisauce</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">24.50</span>
-                  </div>
-                  <p class="dish-desc">Fitness-Teller</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Gefüllte Champignon</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">27.50</span>
-                  </div>
-                  <p class="dish-desc">Zucchetti · Peperoni · Käse · auf Weissweinrisotto · Gemüse</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Risotto Parmesan</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">18.50</span>
-                  </div>
-                </li>
-              </ul>
-            </section>
+              <!-- ─── Page 4: vom Rind & vom Fisch ─── -->
+              <article class="menu-page-card" data-page="3" data-title="vom Rind & vom Fisch">
+                <div class="page-paper">
+                  <header class="menu-section-head">
+                    <span class="ornament-line"></span>
+                    <h3>vom Rind</h3>
+                    <span class="ornament-line"></span>
+                  </header>
+                  <ul class="menu-list">
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Entrecote Kräuterschaum — 200 gr</span><span class="leader" aria-hidden="true"></span><span class="price">44.00</span></div>
+                      <p class="dish-desc">Kroketten · Gemüse</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Entrecote Kräuterschaum — 300 gr</span><span class="leader" aria-hidden="true"></span><span class="price">48.00</span></div>
+                      <p class="dish-desc">Kroketten · Gemüse</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Stroganoff</span><span class="leader" aria-hidden="true"></span><span class="price">36.00</span></div>
+                      <p class="dish-desc">Spätzli · Gemüse</p>
+                    </li>
+                  </ul>
 
+                  <header class="menu-section-head menu-section-head--second">
+                    <span class="ornament-line"></span>
+                    <h3>vom Fisch</h3>
+                    <span class="ornament-line"></span>
+                  </header>
+                  <ul class="menu-list">
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Lachsforelle · Zitronenbutter</span><span class="leader" aria-hidden="true"></span><span class="price">35.50</span></div>
+                      <p class="dish-desc">Weissweinrisotto · Gemüse</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Hausgemachte Zanderknusperli</span><span class="leader" aria-hidden="true"></span><span class="price">28.50</span></div>
+                      <p class="dish-desc">Tartarsauce · Pommes-frites · Gemüse oder Fitnessteller</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Black Tiger (Riesencrevetten)</span><span class="leader" aria-hidden="true"></span><span class="price">33.00</span></div>
+                      <p class="dish-desc">Nudeln · Dörrtomaten · Spinat · Knoblauch · Sambal · Parmesan</p>
+                    </li>
+                  </ul>
+                </div>
+                <span class="page-num">4</span>
+              </article>
+
+              <!-- ─── Page 5: Röschti & Vegetarisch ─── -->
+              <article class="menu-page-card" data-page="4" data-title="Röschti & Vegetarisch">
+                <div class="page-paper">
+                  <header class="menu-section-head">
+                    <span class="ornament-line"></span>
+                    <h3>Röschti esch&rsquo;s Gröschti</h3>
+                    <span class="ornament-line"></span>
+                  </header>
+                  <ul class="menu-list">
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Älpler-Rösti</span><span class="leader" aria-hidden="true"></span><span class="price">23.50</span></div>
+                      <p class="dish-desc">Schinken · Käse · Spiegelei</p>
+                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Rösti — 2 Stk. Spiegelei</span><span class="leader" aria-hidden="true"></span><span class="price">20.50</span></div></li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Gemüse-Rösti</span><span class="leader" aria-hidden="true"></span><span class="price">22.50</span></div>
+                      <p class="dish-desc">Käse · Spiegelei</p>
+                    </li>
+                  </ul>
+
+                  <header class="menu-section-head menu-section-head--second">
+                    <span class="ornament-line"></span>
+                    <h3>Vegetarisch</h3>
+                    <span class="ornament-line"></span>
+                  </header>
+                  <ul class="menu-list">
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Gemüseteller mit Kroketten</span><span class="leader" aria-hidden="true"></span><span class="price">25.50</span></div></li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Frühlingsrollen</span><span class="leader" aria-hidden="true"></span><span class="price">24.50</span></div>
+                      <p class="dish-desc">Sweet &amp; Chilisauce · Fitness-Teller</p>
+                    </li>
+                    <li class="menu-item">
+                      <div class="menu-item-row"><span class="dish">Gefüllte Champignon</span><span class="leader" aria-hidden="true"></span><span class="price">27.50</span></div>
+                      <p class="dish-desc">Zucchetti · Peperoni · Käse · Weissweinrisotto · Gemüse</p>
+                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Risotto Parmesan</span><span class="leader" aria-hidden="true"></span><span class="price">18.50</span></div></li>
+                  </ul>
+                </div>
+                <span class="page-num">5</span>
+              </article>
+
+              <!-- ─── Page 6: Herkunft & Lieferanten ─── -->
+              <article class="menu-page-card menu-page-card--info" data-page="5" data-title="Herkunft &amp; Lieferanten">
+                <div class="page-paper">
+                  <header class="menu-section-head">
+                    <span class="ornament-line"></span>
+                    <h3>Herkunft</h3>
+                    <span class="ornament-line"></span>
+                  </header>
+                  <dl class="declaration">
+                    <div><dt>Schwein</dt><dd>Schweiz</dd></div>
+                    <div><dt>Poulet</dt><dd>Schweiz · Bell</dd></div>
+                    <div><dt>Rind</dt><dd>Schweiz</dd></div>
+                    <div><dt>Fisch</dt><dd>CH · EE · DE · NO</dd></div>
+                    <div><dt>Crevetten</dt><dd>Vietnam</dd></div>
+                  </dl>
+
+                  <header class="menu-section-head menu-section-head--second">
+                    <span class="ornament-line"></span>
+                    <h3>Lieferanten</h3>
+                    <span class="ornament-line"></span>
+                  </header>
+                  <ul class="suppliers">
+                    <li><span class="sup-name">Bäckerei Stadelmann</span><span class="sup-place">Zell</span></li>
+                    <li><span class="sup-name">Bäckerei Birrer</span><span class="sup-place">Zell</span></li>
+                    <li><span class="sup-name">Metzgerei Stöckli</span><span class="sup-place">Zell</span></li>
+                    <li><span class="sup-name">Mundo</span><span class="sup-place">Rothenburg</span></li>
+                    <li><span class="sup-name">Bodenbergerchäsi</span><span class="sup-place">Zell</span></li>
+                    <li><span class="sup-name">Prodega</span><span class="sup-place">Langenthal</span></li>
+                    <li><span class="sup-name">Transgourmet</span><span class="sup-place">Neuendorf</span></li>
+                    <li><span class="sup-name">Wein44</span><span class="sup-place">Zell</span></li>
+                    <li><span class="sup-name">Wälti Kurt Brandwein</span><span class="sup-place">Ettiswil</span></li>
+                    <li><span class="sup-name">Ziswiler Kurt Getränke</span><span class="sup-place">Ettiswil</span></li>
+                  </ul>
+                </div>
+                <span class="page-num">6</span>
+              </article>
+
+            </div>
           </div>
+        </article>
 
-          <div class="menu-card-spine" aria-hidden="true"></div>
+        <button class="flip-btn flip-next" type="button" aria-label="Nächste Seite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
 
-          <!-- RIGHT PAGE -->
-          <div class="menu-page menu-page-right">
-
-            <section class="menu-section">
-              <header class="menu-section-head">
-                <span class="ornament-line"></span>
-                <h3>vom Schwein</h3>
-                <span class="ornament-line"></span>
-              </header>
-              <ul class="menu-list">
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Schnitzel paniert</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">25.50</span>
-                  </div>
-                  <p class="dish-desc">Pommes-frites · Gemüse</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Roger&rsquo;s Schnitzel paniert</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">37.50</span>
-                  </div>
-                  <p class="dish-desc">Champignonsauce · Tomaten und Käse überbacken · Pommes-frites · Gemüse</p>
-                </li>
-                <li class="menu-item menu-item--variants">
-                  <div class="menu-item-row">
-                    <span class="dish">Cordon bleu</span>
-                  </div>
-                  <p class="dish-desc">gefüllt mit Schinken und Käse · Pommes-frites · Gemüse</p>
-                  <ul class="variants">
-                    <li><span class="size">700 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">38.50</span></li>
-                    <li><span class="size">500 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">36.50</span></li>
-                    <li><span class="size">250 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">32.50</span></li>
-                  </ul>
-                </li>
-                <li class="menu-item menu-item--variants">
-                  <div class="menu-item-row">
-                    <span class="dish">Cordon bleu Haus-Art</span>
-                  </div>
-                  <p class="dish-desc">gefüllt mit Schinken und Käse · mit Café de Paris · Pommes-frites · Gemüse</p>
-                  <ul class="variants">
-                    <li><span class="size">700 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">40.50</span></li>
-                    <li><span class="size">500 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">38.50</span></li>
-                    <li><span class="size">250 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">34.50</span></li>
-                  </ul>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Schweinssteak mit Kräuterbutter — 250 gr</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">28.50</span>
-                  </div>
-                  <p class="dish-desc">Pommes-frites · Gemüse oder als Fitness-Teller</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Schweins Rahmschnitzel</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">28.50</span>
-                  </div>
-                  <p class="dish-desc">Champignon-Rahmsauce · Nudeln · Gemüse</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Bauernbratwurst — 180 gr</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">22.50</span>
-                  </div>
-                  <p class="dish-desc">mit Zwiebelsauce · Butter-Rösti · Gemüse</p>
-                </li>
-              </ul>
-            </section>
-
-            <section class="menu-section">
-              <header class="menu-section-head">
-                <span class="ornament-line"></span>
-                <h3>vom Poulet</h3>
-                <span class="ornament-line"></span>
-              </header>
-              <ul class="menu-list">
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Leckere Poulet-Flügeli — 6 Stk.</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">17.50</span>
-                  </div>
-                  <p class="dish-desc">Haussauce</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">… mit Pommes-frites</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">22.50</span>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Poulet-Flügeli — pro Stück</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">2.60</span>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Haussauce</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">2.50</span>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Chicken Nuggets — 10 Stk.</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">18.00</span>
-                  </div>
-                  <p class="dish-desc">Pommes-frites</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Poulet-Brust Kräuterschaum</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">27.50</span>
-                  </div>
-                  <p class="dish-desc">Pommes-frites · Gemüse</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Poulet Cordon bleu</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">34.50</span>
-                  </div>
-                  <p class="dish-desc">gefüllt mit Schinken und Käse · Pommes-frites · Gemüse</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Poulet-Brust Kräuterschaum im Speckmantel</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">36.50</span>
-                  </div>
-                  <p class="dish-desc">gefüllt mit Brie · Rohschinken &amp; Dörrtomaten · Pommes-frites · Gemüse</p>
-                </li>
-              </ul>
-            </section>
-
-            <section class="menu-section">
-              <header class="menu-section-head">
-                <span class="ornament-line"></span>
-                <h3>vom Rind</h3>
-                <span class="ornament-line"></span>
-              </header>
-              <ul class="menu-list">
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Entrecote Kräuterschaum — 200 gr</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">44.00</span>
-                  </div>
-                  <p class="dish-desc">Kroketten · Gemüse</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Entrecote Kräuterschaum — 300 gr</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">48.00</span>
-                  </div>
-                  <p class="dish-desc">Kroketten · Gemüse</p>
-                </li>
-                <li class="menu-item">
-                  <div class="menu-item-row">
-                    <span class="dish">Stroganoff</span>
-                    <span class="leader" aria-hidden="true"></span>
-                    <span class="price">36.00</span>
-                  </div>
-                  <p class="dish-desc">Spätzli · Gemüse</p>
-                </li>
-              </ul>
-            </section>
-
-          </div>
-
+      <nav class="menu-pager" data-reveal data-delay="500" aria-label="Seiten der Speisekarte">
+        <div class="page-dots" role="tablist">
+          <button class="page-dot is-active" type="button" data-page="0" aria-label="Vorspeisen"></button>
+          <button class="page-dot" type="button" data-page="1" aria-label="vom Schwein"></button>
+          <button class="page-dot" type="button" data-page="2" aria-label="vom Poulet"></button>
+          <button class="page-dot" type="button" data-page="3" aria-label="vom Rind &amp; vom Fisch"></button>
+          <button class="page-dot" type="button" data-page="4" aria-label="Röschti &amp; Vegetarisch"></button>
+          <button class="page-dot" type="button" data-page="5" aria-label="Herkunft &amp; Lieferanten"></button>
         </div>
-
-        <div class="menu-meta">
-          <p class="menu-foot">Für Informationen zu Allergenen wenden Sie sich an unser Personal · Preise in CHF inkl. 8.1&nbsp;% MwSt.</p>
-          <dl class="declaration">
-            <div><dt>Schwein</dt><dd>Schweiz</dd></div>
-            <div><dt>Poulet</dt><dd>Schweiz · Bell</dd></div>
-            <div><dt>Rind</dt><dd>Schweiz</dd></div>
-            <div><dt>Fisch</dt><dd>Schweiz · Estland · Deutschland · Norwegen</dd></div>
-            <div><dt>Crevetten</dt><dd>Vietnam</dd></div>
-          </dl>
-          <a class="pdf-link" href="https://fischfischbach.ch/wp-content/uploads/Speisekarte-2025.pdf" target="_blank" rel="noopener">
-            Speisekarte als PDF herunterladen ↗
-          </a>
+        <div class="page-meta">
+          <span class="page-counter"><span class="page-current">1</span><span class="page-divider"> / </span><span class="page-total">6</span></span>
+          <span class="page-title">Vorspeisen</span>
         </div>
-      </article>
+      </nav>
+
+      <div class="menu-meta" data-reveal data-delay="600">
+        <p class="menu-foot">Für Informationen zu Allergenen wenden Sie sich an unser Personal · Preise in CHF inkl. 8.1&nbsp;% MwSt.</p>
+        <a class="pdf-link" href="https://fischfischbach.ch/wp-content/uploads/Speisekarte-2025.pdf" target="_blank" rel="noopener">
+          Speisekarte als PDF herunterladen ↗
+        </a>
+      </div>
     </div>
   </section>
 
@@ -596,6 +492,83 @@
           <div class="hours-time">geschlossen</div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 5b — RESERVATION ==================== -->
+  <section id="reservation" class="scene scene-reservation">
+    <div class="layer layer-bg" data-speed="0.1" style="background-image:url('assets/gedeck.jpg')"></div>
+    <div class="layer layer-tint deep"></div>
+
+    <div class="reservation-inner">
+      <p class="kicker light" data-reveal>— Reservation</p>
+      <h2 class="display light" data-reveal data-delay="100">Tisch <em>reservieren</em></h2>
+      <p class="lead light" data-reveal data-delay="220">
+        Wir empfehlen, vorab zu reservieren. Füllen Sie das Formular aus oder rufen Sie uns
+        direkt an: <a class="phone-link" href="tel:+41796363281">079 636 32 81</a>.
+      </p>
+
+      <form class="reservation-form" data-reveal data-delay="380" novalidate>
+        <div class="form-row form-row--3">
+          <label class="form-field">
+            <span class="form-label">Datum</span>
+            <input type="date" name="date" required />
+          </label>
+          <label class="form-field">
+            <span class="form-label">Uhrzeit</span>
+            <select name="time" required>
+              <option value="">— wählen —</option>
+              <optgroup label="Mittag">
+                <option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option>
+              </optgroup>
+              <optgroup label="Abend">
+                <option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option>
+                <option>19:30</option><option>20:00</option><option>20:30</option>
+              </optgroup>
+            </select>
+          </label>
+          <label class="form-field">
+            <span class="form-label">Personen</span>
+            <select name="guests" required>
+              <option value="">—</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option><option>8</option>
+              <option value="9+">9 oder mehr</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-row form-row--2">
+          <label class="form-field">
+            <span class="form-label">Vor- und Nachname</span>
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label class="form-field">
+            <span class="form-label">Telefon</span>
+            <input type="tel" name="phone" autocomplete="tel" required />
+          </label>
+        </div>
+
+        <label class="form-field">
+          <span class="form-label">E-Mail</span>
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+
+        <label class="form-field">
+          <span class="form-label">Bemerkungen <span class="optional">(optional)</span></span>
+          <textarea name="notes" rows="3" placeholder="Allergien, Kinderstuhl, Anlass …"></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="form-submit">
+            <span>Reservation anfragen</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+          <p class="form-note">Die Anfrage wird per E-Mail an info@fischfischbach.ch gesendet.</p>
+        </div>
+
+        <output class="form-status" hidden></output>
+      </form>
     </div>
   </section>
 

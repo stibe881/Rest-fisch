@@ -13,6 +13,9 @@
    * --------------------------------------------------------- */
   const revealEls = document.querySelectorAll('[data-reveal], [data-zoom]');
 
+  // threshold:0 + rootMargin so we fire as soon as ANY pixel of the element
+  // enters the viewport. The previous threshold of 0.18 never fired for
+  // elements taller than the viewport (e.g. the menu booklet on mobile).
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -22,11 +25,20 @@
       revealObs.unobserve(el);
     });
   }, {
-    threshold: 0.18,
-    rootMargin: '0px 0px -8% 0px',
+    threshold: 0,
+    rootMargin: '0px 0px -10% 0px',
   });
 
   revealEls.forEach((el) => revealObs.observe(el));
+
+  // Belt-and-suspenders: any element still hidden after 1.5 s gets revealed.
+  // Defends against IO edge cases on some mobile browsers.
+  setTimeout(() => {
+    document.querySelectorAll('[data-reveal]:not(.is-visible), [data-zoom]:not(.is-visible)').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200) el.classList.add('is-visible');
+    });
+  }, 1500);
 
   /* -----------------------------------------------------------
    * 2. Parallax engine — layered depth at different speeds
@@ -156,8 +168,140 @@
       });
       cardObs.unobserve(entry.target);
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
   document.querySelectorAll('.cards').forEach((c) => cardObs.observe(c));
+
+  /* -----------------------------------------------------------
+   * 6. Speisekarte — flippable booklet
+   * --------------------------------------------------------- */
+  const booklet = document.querySelector('.booklet');
+  if (booklet) {
+    const track   = booklet.querySelector('.menu-pages-track');
+    const pages   = booklet.querySelectorAll('.menu-page-card');
+    const prevBtn = booklet.querySelector('.flip-prev');
+    const nextBtn = booklet.querySelector('.flip-next');
+    const viewport= booklet.querySelector('.menu-pages-viewport');
+    const pager   = document.querySelector('.menu-pager');
+    const dots    = pager ? pager.querySelectorAll('.page-dot') : [];
+    const curEl   = pager ? pager.querySelector('.page-current') : null;
+    const totEl   = pager ? pager.querySelector('.page-total')   : null;
+    const titleEl = pager ? pager.querySelector('.page-title')   : null;
+    const N       = pages.length;
+
+    if (totEl) totEl.textContent = N;
+    let current = 0;
+
+    function flipUpdate() {
+      const pct = current * (100 / N);
+      track.style.transform = `translateX(-${pct}%)`;
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+      if (curEl)   curEl.textContent   = current + 1;
+      if (titleEl) titleEl.textContent = pages[current].dataset.title || '';
+      if (prevBtn) prevBtn.toggleAttribute('disabled', current <= 0);
+      if (nextBtn) nextBtn.toggleAttribute('disabled', current >= N - 1);
+    }
+
+    function go(delta) {
+      const target = Math.max(0, Math.min(N - 1, current + delta));
+      if (target !== current) { current = target; flipUpdate(); }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => go(+1));
+    dots.forEach((dot) => dot.addEventListener('click', () => {
+      const t = parseInt(dot.dataset.page, 10);
+      if (!Number.isNaN(t)) { current = t; flipUpdate(); }
+    }));
+
+    // Keyboard arrows when card focused
+    const card = booklet.querySelector('.menu-card');
+    if (card) {
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); go(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(+1); }
+      });
+    }
+
+    // Touch swipe
+    if (viewport) {
+      let tx = 0, ty = 0;
+      viewport.addEventListener('touchstart', (e) => {
+        tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+      }, { passive: true });
+      viewport.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - tx;
+        const dy = e.changedTouches[0].clientY - ty;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+          go(dx < 0 ? +1 : -1);
+        }
+      });
+    }
+
+    flipUpdate();
+  }
+
+  /* -----------------------------------------------------------
+   * 7. Reservation form — mailto handoff
+   * --------------------------------------------------------- */
+  const resForm = document.querySelector('.reservation-form');
+  if (resForm) {
+    const status = resForm.querySelector('.form-status');
+
+    // Set min date = today
+    const dateInput = resForm.querySelector('input[name="date"]');
+    if (dateInput) {
+      const t = new Date();
+      const yyyy = t.getFullYear();
+      const mm = String(t.getMonth() + 1).padStart(2, '0');
+      const dd = String(t.getDate()).padStart(2, '0');
+      dateInput.min = `${yyyy}-${mm}-${dd}`;
+    }
+
+    function showStatus(msg, isError) {
+      if (!status) return;
+      status.hidden = false;
+      status.textContent = msg;
+      status.classList.toggle('is-error', !!isError);
+    }
+
+    resForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(resForm);
+      const date   = (data.get('date')   || '').trim();
+      const time   = (data.get('time')   || '').trim();
+      const guests = (data.get('guests') || '').trim();
+      const name   = (data.get('name')   || '').trim();
+      const email  = (data.get('email')  || '').trim();
+      const phone  = (data.get('phone')  || '').trim();
+      const notes  = (data.get('notes')  || '').trim();
+
+      if (!date || !time || !guests || !name || !email || !phone) {
+        showStatus('Bitte füllen Sie alle Pflichtfelder aus.', true);
+        return;
+      }
+
+      const subject = `Reservation ${date} ${time} · ${guests} Personen`;
+      const body = [
+        'Reservation-Anfrage über fischfischbach.ch',
+        '',
+        `Datum:    ${date}`,
+        `Uhrzeit:  ${time}`,
+        `Personen: ${guests}`,
+        '',
+        `Name:     ${name}`,
+        `E-Mail:   ${email}`,
+        `Telefon:  ${phone}`,
+      ];
+      if (notes) { body.push('', 'Bemerkungen:', notes); }
+
+      const mailto = `mailto:info@fischfischbach.ch`
+        + `?subject=${encodeURIComponent(subject)}`
+        + `&body=${encodeURIComponent(body.join('\n'))}`;
+
+      showStatus('Vielen Dank! Ihr E-Mail-Programm öffnet sich nun. Senden Sie die Anfrage ab — wir bestätigen Ihre Reservation umgehend.', false);
+      window.location.href = mailto;
+    });
+  }
 
   /* -----------------------------------------------------------
    * 6. Init
