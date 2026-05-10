@@ -3,399 +3,234 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restaurant Fisch Fischbach — Gerne verwöhnen wir Sie</title>
-  <meta name="description" content="Restaurant Fisch Fischbach — feine Menüs aus gut bürgerlicher Küche. Hauptstrasse 9, 6145 Fischbach." />
+  <title>Restaurant Fisch · Fischbach</title>
+  <meta name="description" content="Restaurant Fisch · Fischbach. Stille. Sorgfalt. Ein Tisch zwischen Wäldern." />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="icon" type="image/png" href="assets/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lora:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=9" />
 </head>
 <body>
 
-  <!-- Progress rail -->
-  <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
+<!-- Tiny brand mark -->
+<a href="#i" class="brandmark" aria-label="Restaurant Fisch · Anfang">
+  <img src="assets/logo.png" alt="" />
+</a>
 
-  <!-- Floating nav -->
-  <nav class="nav">
-    <a href="#hero" class="nav-brand">
-      <img src="assets/logo.png" alt="Restaurant Fisch Fischbach" />
-    </a>
+<!-- Hidden navigation -->
+<nav class="navmark" aria-label="Inhalt">
+  <button class="navmark-toggle" type="button" aria-expanded="false" aria-controls="navmark-list" aria-label="Inhalt anzeigen">
+    <span class="navmark-dot" aria-hidden="true"></span>
+  </button>
+  <ul class="navmark-list" id="navmark-list">
+    <li><a href="#i" data-roman="i">stille</a></li>
+    <li><a href="#ii" data-roman="ii">wort</a></li>
+    <li><a href="#iii" data-roman="iii">tisch</a></li>
+    <li><a href="#iv" data-roman="iv">wo · wann</a></li>
+    <li><a href="#v" data-roman="v">küche</a></li>
+    <li><a href="#vi" data-roman="vi">reservation</a></li>
+    <li><a href="#vii" data-roman="vii">bis bald</a></li>
+  </ul>
+</nav>
 
-    <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="primary-nav">
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
+<main>
+
+  <!-- I. Stille -->
+  <section id="i" class="frame frame-image">
+    <div class="frame-bg" data-fade-bg style="background-image:url('assets/haus.jpg')"></div>
+    <div class="frame-veil" aria-hidden="true"></div>
+    <div class="frame-inner">
+      <p class="whisper" data-fade data-delay="2200">restaurant fisch · fischbach</p>
+    </div>
+    <span class="scroll-cue" aria-hidden="true" data-fade data-delay="3800"><span></span></span>
+  </section>
+
+  <!-- II. Wort -->
+  <section id="ii" class="frame frame-text">
+    <p class="line" data-fade>gerne verwöhnen wir sie.</p>
+    <p class="line-quiet" data-fade data-delay="1600">— in unserem schönen ambiente</p>
+  </section>
+
+  <!-- III. Tisch (image breath) -->
+  <section id="iii" class="frame frame-image frame-image-soft">
+    <div class="frame-bg" data-fade-bg style="background-image:url('assets/gedeck.jpg')"></div>
+    <div class="frame-veil veil-soft" aria-hidden="true"></div>
+  </section>
+
+  <!-- IV. Wo · wann · wer -->
+  <section id="iv" class="frame frame-grid">
+    <div class="cell" data-fade>
+      <p class="cell-label">wo</p>
+      <p class="cell-body">Hauptstrasse 9<br/>6145 Fischbach</p>
+    </div>
+    <div class="cell" data-fade data-delay="900">
+      <p class="cell-label">wann</p>
+      <p class="cell-body">Mo · Do · Fr<br/>11:30 — 13:30<br/><br/>Do — Sa<br/>17:30 — 21:00</p>
+    </div>
+    <div class="cell" data-fade data-delay="1800">
+      <p class="cell-label">wer</p>
+      <p class="cell-body">Roger Giger<br/>+ Fisch-Team</p>
+    </div>
+  </section>
+
+  <!-- V. Küche -->
+  <section id="v" class="frame frame-text">
+    <button type="button" class="reveal" data-modal="speisekarte" data-fade>
+      <span class="reveal-num">v.</span>
+      <span class="reveal-line">die karte</span>
+      <span class="reveal-quiet">— ein blick in die küche</span>
     </button>
-
-    <ul class="nav-links" id="primary-nav">
-      <li><a href="#welcome">Willkommen</a></li>
-      <li><a href="#philosophy">Philosophie</a></li>
-      <li><a href="#menu">Angebot</a></li>
-      <li><a href="#speisekarte">Speisekarte</a></li>
-      <li><a href="#hours">Öffnungszeiten</a></li>
-      <li><a href="#reservation">Reservation</a></li>
-      <li><a href="#contact">Kontakt</a></li>
-    </ul>
-  </nav>
-  <div class="nav-backdrop" aria-hidden="true"></div>
-
-  <!-- ==================== SCENE 1 — HERO ==================== -->
-  <section id="hero" class="scene scene-hero">
-    <div class="layer layer-bg" data-speed="0.15" style="background-image:url('assets/haus.jpg')"></div>
-    <div class="layer layer-mid" data-speed="0.35" aria-hidden="true">
-      <svg viewBox="0 0 1440 600" preserveAspectRatio="none">
-        <path d="M0,420 C240,360 480,500 720,440 C960,380 1200,500 1440,420 L1440,600 L0,600 Z" fill="rgba(8,28,42,0.45)"/>
-      </svg>
-    </div>
-    <div class="layer layer-fore" data-speed="0.6" aria-hidden="true">
-      <svg viewBox="0 0 1440 600" preserveAspectRatio="none">
-        <path d="M0,520 C240,480 480,580 720,540 C960,500 1200,580 1440,520 L1440,600 L0,600 Z" fill="rgba(3,14,22,0.85)"/>
-      </svg>
-    </div>
-
-    <div class="hero-content">
-      <p class="eyebrow" data-reveal>Hauptstrasse 9 · 6145 Fischbach</p>
-      <h1 class="hero-title" data-zoom>
-        <span class="hero-script">Restaurant</span>
-        <span class="hero-bold">Fisch</span>
-      </h1>
-      <p class="hero-place" data-reveal data-delay="200">Fischbach · Schweiz</p>
-      <p class="hero-tag" data-reveal data-delay="350">Feine Menüs aus unserer gut bürgerlichen Küche.</p>
-      <a href="#welcome" class="hero-arrow" aria-label="Weiterscrollen">
-        <span></span>
-      </a>
-    </div>
   </section>
 
-  <!-- ==================== SCENE 2 — WELCOME ==================== -->
-  <section id="welcome" class="scene scene-welcome">
-    <div class="parallax-stack">
-      <div class="layer layer-bg" data-speed="0.1" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=2400&q=80')"></div>
-      <div class="layer layer-tint"></div>
-      <div class="floating-fish fish-1" data-speed="0.45" aria-hidden="true">
-        <svg viewBox="0 0 200 80"><path d="M10,40 C40,5 100,5 140,40 C100,75 40,75 10,40 Z M140,40 L185,15 L185,65 Z M50,40 a3,3 0 1,0 0.1,0" fill="rgba(255,255,255,0.18)"/></svg>
-      </div>
-      <div class="floating-fish fish-2" data-speed="0.7" aria-hidden="true">
-        <svg viewBox="0 0 200 80"><path d="M10,40 C40,5 100,5 140,40 C100,75 40,75 10,40 Z M140,40 L185,15 L185,65 Z M50,40 a3,3 0 1,0 0.1,0" fill="rgba(255,255,255,0.10)"/></svg>
-      </div>
-    </div>
-
-    <div class="welcome-content">
-      <p class="kicker" data-reveal>— Herzlich Willkommen</p>
-      <h2 class="display" data-reveal data-delay="100">
-        <em>Gerne</em> verwöhnen<br/>wir <em>Sie.</em>
-      </h2>
-      <p class="lead" data-reveal data-delay="250">
-        Ein Ort am Wasser, an dem traditionelle Schweizer Küche auf
-        herzliche Gastfreundschaft trifft. Wir freuen uns auf Sie.
-      </p>
-      <span class="divider" data-reveal data-delay="400">Reservationen erwünscht</span>
-    </div>
+  <!-- VI. Tisch reservieren -->
+  <section id="vi" class="frame frame-text">
+    <button type="button" class="reveal" data-modal="reservation" data-fade>
+      <span class="reveal-num">vi.</span>
+      <span class="reveal-line">einen tisch</span>
+      <span class="reveal-quiet">— vorab reservieren</span>
+    </button>
   </section>
 
-  <!-- ==================== SCENE 3 — PHILOSOPHY ==================== -->
-  <section id="philosophy" class="scene scene-philosophy">
-    <div class="split">
-      <div class="split-visual">
-        <div class="depth-stack">
-          <div class="depth-layer depth-back" data-speed="0.2" style="background-image:url('https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&w=1600&q=80')"></div>
-          <div class="depth-layer depth-mid" data-speed="0.4" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=80')"></div>
-          <div class="depth-layer depth-front" data-speed="0.65" style="background-image:url('https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=1200&q=80')"></div>
-        </div>
-      </div>
-      <div class="split-text">
-        <p class="kicker" data-reveal>— unsere Philosophie</p>
-        <h2 class="display" data-reveal data-delay="100">Aus der Region.<br/><em>Mit Sorgfalt.</em></h2>
-        <p class="body" data-reveal data-delay="250">
-          Es ist uns wichtig, Lieferanten mit Produkten aus der Region zu
-          berücksichtigen. So entstehen feine Menüs aus unserer gut
-          bürgerlichen Küche — ehrlich, saisonal und mit Liebe zum Detail
-          zubereitet.
-        </p>
-        <ul class="pill-row" data-reveal data-delay="400">
-          <li>Regional</li>
-          <li>Saisonal</li>
-          <li>Hausgemacht</li>
-        </ul>
-      </div>
-    </div>
+  <!-- VII. Bis bald -->
+  <section id="vii" class="frame frame-text">
+    <p class="line line-large" data-fade>bis bald.</p>
+    <p class="contact-line" data-fade data-delay="1500">
+      <a href="tel:+41796363281">079 636 32 81</a>
+      <span aria-hidden="true">·</span>
+      <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a>
+    </p>
   </section>
 
-  <!-- ==================== SCENE 4 — MENU / OFFER ==================== -->
-  <section id="menu" class="scene scene-menu">
-    <div class="layer layer-bg" data-speed="0.15" style="background-image:url('https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=2400&q=80')"></div>
-    <div class="layer layer-tint dark"></div>
+</main>
 
-    <div class="menu-inner">
-      <p class="kicker light" data-reveal>— Angebot</p>
-      <h2 class="display light" data-reveal data-delay="100">Was wir <em>servieren.</em></h2>
+<footer class="micro-foot">
+  <span>© <span id="year"></span> Restaurant Fisch · Fischbach</span>
+  <span aria-hidden="true">·</span>
+  <button type="button" data-modal="impressum">impressum</button>
+  <span aria-hidden="true">·</span>
+  <button type="button" data-modal="datenschutz">datenschutz</button>
+</footer>
 
-      <div class="cards">
-        <article class="card" data-reveal data-delay="100">
-          <span class="card-num">01</span>
-          <h3>À la carte</h3>
-          <p>Eine sorgfältig kuratierte Karte mit Klassikern und saisonalen Spezialitäten.</p>
-        </article>
-        <article class="card" data-reveal data-delay="220">
-          <span class="card-num">02</span>
-          <h3>Mittagsmenüs</h3>
-          <p>Mo, Do & Fr von 11:30 – 13:30. Frisch zubereitet, fair und unkompliziert.</p>
-        </article>
-        <article class="card" data-reveal data-delay="340">
-          <span class="card-num">03</span>
-          <h3>Bankette & Gruppen</h3>
-          <p>Familienfeiern, Firmenanlässe oder Carreisen — Bankettkarte auf Anfrage.</p>
-        </article>
-        <article class="card" data-reveal data-delay="460">
-          <span class="card-num">04</span>
-          <h3>Geschenkgutscheine</h3>
-          <p>Schenken Sie genussvolle Stunden zu zweit oder im Kreis der Familie.</p>
-        </article>
-      </div>
-    </div>
-  </section>
 
-  <!-- ==================== SCENE 4b — SPEISEKARTE (flippable booklet) ==================== -->
-  <section id="speisekarte" class="scene scene-card">
-    <div class="card-grain" aria-hidden="true"></div>
-    <div class="card-stage">
-      <p class="kicker" data-reveal>— Speisekarte 2025</p>
-      <h2 class="display" data-reveal data-delay="100">Aus der <em>Küche</em></h2>
-      <p class="lead" data-reveal data-delay="220">
-        Herzlich willkommen im Fisch — gerne verwöhnen wir Sie in unserem schönen Ambiente.<br/>
-        <em class="signature">Ihr Fisch-Team</em>
-      </p>
+<!-- ===== Modal: Speisekarte (booklet) ===== -->
+<div class="modal" id="modal-speisekarte" hidden role="dialog" aria-modal="true" aria-labelledby="speisekarte-title">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-card modal-card--wide" role="document">
+    <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <div class="modal-content modal-content--menu">
+      <p class="kicker">— speisekarte 2025</p>
+      <h2 class="display" id="speisekarte-title">aus der küche</h2>
+      <p class="legal-lead">herzlich willkommen im fisch — gerne verwöhnen wir sie in unserem schönen ambiente.</p>
 
       <div class="booklet">
         <button class="flip-btn flip-prev" type="button" aria-label="Vorherige Seite">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
         </button>
 
         <article class="menu-card" tabindex="0">
           <div class="menu-pages-viewport">
             <div class="menu-pages-track">
 
-              <!-- ─── Page 1: Vorspeisen ─── -->
+              <!-- 1: Vorspeisen -->
               <article class="menu-page-card" data-page="0" data-title="Vorspeisen">
                 <div class="page-paper">
-                  <header class="menu-section-head">
-                    <span class="ornament-line"></span>
-                    <h3>Vorspeisen</h3>
-                    <span class="ornament-line"></span>
-                  </header>
+                  <header class="menu-section-head"><span class="ornament-line"></span><h3>Vorspeisen</h3><span class="ornament-line"></span></header>
                   <ul class="menu-list">
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Knackiger Blattsalat</span><span class="leader" aria-hidden="true"></span><span class="price">8.00</span></div></li>
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Gemischter bunter Salat</span><span class="leader" aria-hidden="true"></span><span class="price">10.00</span></div></li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Salatteller garniert mit Früchten</span><span class="leader" aria-hidden="true"></span><span class="price">19.50</span></div>
-                      <p class="dish-desc">Dressing: französisch · italienisch · Honig-Senf</p>
-                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Salatteller garniert mit Früchten</span><span class="leader" aria-hidden="true"></span><span class="price">19.50</span></div><p class="dish-desc">Dressing: französisch · italienisch · Honig-Senf</p></li>
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Bouillon mit Flädli</span><span class="leader" aria-hidden="true"></span><span class="price">9.00</span></div></li>
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Kokos-Zitronengrassuppe</span><span class="leader" aria-hidden="true"></span><span class="price">10.00</span></div></li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Faustbrot</span><span class="leader" aria-hidden="true"></span><span class="price">8.50</span></div>
-                      <p class="dish-desc">Schinken · Salami · Käse</p>
-                    </li>
-                    <li class="menu-item menu-item--variants">
-                      <div class="menu-item-row"><span class="dish">Beefsteak Tatar mit Butter-Toast</span></div>
-                      <p class="dish-desc">mild · mittelscharf · scharf</p>
-                      <ul class="variants">
-                        <li><span class="size">klein</span><span class="vleader" aria-hidden="true"></span><span class="price">26.00</span></li>
-                        <li><span class="size">gross</span><span class="vleader" aria-hidden="true"></span><span class="price">34.00</span></li>
-                      </ul>
-                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Faustbrot</span><span class="leader" aria-hidden="true"></span><span class="price">8.50</span></div><p class="dish-desc">Schinken · Salami · Käse</p></li>
+                    <li class="menu-item menu-item--variants"><div class="menu-item-row"><span class="dish">Beefsteak Tatar mit Butter-Toast</span></div><p class="dish-desc">mild · mittelscharf · scharf</p><ul class="variants"><li><span class="size">klein</span><span class="vleader" aria-hidden="true"></span><span class="price">26.00</span></li><li><span class="size">gross</span><span class="vleader" aria-hidden="true"></span><span class="price">34.00</span></li></ul></li>
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Pommes-frites — kleine Portion</span><span class="leader" aria-hidden="true"></span><span class="price">7.00</span></div></li>
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Pommes-frites — Portion</span><span class="leader" aria-hidden="true"></span><span class="price">9.50</span></div></li>
                   </ul>
                 </div>
-                <span class="page-num">1</span>
+                <span class="page-num">i</span>
               </article>
 
-              <!-- ─── Page 2: vom Schwein ─── -->
+              <!-- 2: vom Schwein -->
               <article class="menu-page-card" data-page="1" data-title="vom Schwein">
                 <div class="page-paper">
-                  <header class="menu-section-head">
-                    <span class="ornament-line"></span>
-                    <h3>vom Schwein</h3>
-                    <span class="ornament-line"></span>
-                  </header>
+                  <header class="menu-section-head"><span class="ornament-line"></span><h3>vom Schwein</h3><span class="ornament-line"></span></header>
                   <ul class="menu-list">
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Schnitzel paniert</span><span class="leader" aria-hidden="true"></span><span class="price">25.50</span></div>
-                      <p class="dish-desc">Pommes-frites · Gemüse</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Roger&rsquo;s Schnitzel paniert</span><span class="leader" aria-hidden="true"></span><span class="price">37.50</span></div>
-                      <p class="dish-desc">Champignonsauce · Tomaten und Käse überbacken · Pommes-frites · Gemüse</p>
-                    </li>
-                    <li class="menu-item menu-item--variants">
-                      <div class="menu-item-row"><span class="dish">Cordon bleu</span></div>
-                      <p class="dish-desc">gefüllt mit Schinken und Käse · Pommes-frites · Gemüse</p>
-                      <ul class="variants">
-                        <li><span class="size">700 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">38.50</span></li>
-                        <li><span class="size">500 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">36.50</span></li>
-                        <li><span class="size">250 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">32.50</span></li>
-                      </ul>
-                    </li>
-                    <li class="menu-item menu-item--variants">
-                      <div class="menu-item-row"><span class="dish">Cordon bleu Haus-Art</span></div>
-                      <p class="dish-desc">mit Café de Paris · Schinken &amp; Käse · Pommes-frites · Gemüse</p>
-                      <ul class="variants">
-                        <li><span class="size">700 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">40.50</span></li>
-                        <li><span class="size">500 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">38.50</span></li>
-                        <li><span class="size">250 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">34.50</span></li>
-                      </ul>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Schweinssteak Kräuterbutter — 250 gr</span><span class="leader" aria-hidden="true"></span><span class="price">28.50</span></div>
-                      <p class="dish-desc">Pommes-frites · Gemüse oder Fitness-Teller</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Schweins Rahmschnitzel</span><span class="leader" aria-hidden="true"></span><span class="price">28.50</span></div>
-                      <p class="dish-desc">Champignon-Rahmsauce · Nudeln · Gemüse</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Bauernbratwurst — 180 gr</span><span class="leader" aria-hidden="true"></span><span class="price">22.50</span></div>
-                      <p class="dish-desc">Zwiebelsauce · Butter-Rösti · Gemüse</p>
-                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Schnitzel paniert</span><span class="leader" aria-hidden="true"></span><span class="price">25.50</span></div><p class="dish-desc">Pommes-frites · Gemüse</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Roger&rsquo;s Schnitzel paniert</span><span class="leader" aria-hidden="true"></span><span class="price">37.50</span></div><p class="dish-desc">Champignonsauce · Tomaten und Käse überbacken · Pommes-frites · Gemüse</p></li>
+                    <li class="menu-item menu-item--variants"><div class="menu-item-row"><span class="dish">Cordon bleu</span></div><p class="dish-desc">gefüllt mit Schinken und Käse · Pommes-frites · Gemüse</p><ul class="variants"><li><span class="size">700 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">38.50</span></li><li><span class="size">500 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">36.50</span></li><li><span class="size">250 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">32.50</span></li></ul></li>
+                    <li class="menu-item menu-item--variants"><div class="menu-item-row"><span class="dish">Cordon bleu Haus-Art</span></div><p class="dish-desc">mit Café de Paris · Schinken &amp; Käse · Pommes-frites · Gemüse</p><ul class="variants"><li><span class="size">700 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">40.50</span></li><li><span class="size">500 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">38.50</span></li><li><span class="size">250 gr</span><span class="vleader" aria-hidden="true"></span><span class="price">34.50</span></li></ul></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Schweinssteak Kräuterbutter — 250 gr</span><span class="leader" aria-hidden="true"></span><span class="price">28.50</span></div><p class="dish-desc">Pommes-frites · Gemüse oder Fitness-Teller</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Schweins Rahmschnitzel</span><span class="leader" aria-hidden="true"></span><span class="price">28.50</span></div><p class="dish-desc">Champignon-Rahmsauce · Nudeln · Gemüse</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Bauernbratwurst — 180 gr</span><span class="leader" aria-hidden="true"></span><span class="price">22.50</span></div><p class="dish-desc">Zwiebelsauce · Butter-Rösti · Gemüse</p></li>
                   </ul>
                 </div>
-                <span class="page-num">2</span>
+                <span class="page-num">ii</span>
               </article>
 
-              <!-- ─── Page 3: vom Poulet ─── -->
+              <!-- 3: vom Poulet -->
               <article class="menu-page-card" data-page="2" data-title="vom Poulet">
                 <div class="page-paper">
-                  <header class="menu-section-head">
-                    <span class="ornament-line"></span>
-                    <h3>vom Poulet</h3>
-                    <span class="ornament-line"></span>
-                  </header>
+                  <header class="menu-section-head"><span class="ornament-line"></span><h3>vom Poulet</h3><span class="ornament-line"></span></header>
                   <ul class="menu-list">
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Leckere Poulet-Flügeli — 6 Stk.</span><span class="leader" aria-hidden="true"></span><span class="price">17.50</span></div>
-                      <p class="dish-desc">mit Haussauce</p>
-                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Leckere Poulet-Flügeli — 6 Stk.</span><span class="leader" aria-hidden="true"></span><span class="price">17.50</span></div><p class="dish-desc">mit Haussauce</p></li>
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">… mit Pommes-frites</span><span class="leader" aria-hidden="true"></span><span class="price">22.50</span></div></li>
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Poulet-Flügeli pro Stück</span><span class="leader" aria-hidden="true"></span><span class="price">2.60</span></div></li>
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Haussauce</span><span class="leader" aria-hidden="true"></span><span class="price">2.50</span></div></li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Chicken Nuggets — 10 Stk.</span><span class="leader" aria-hidden="true"></span><span class="price">18.00</span></div>
-                      <p class="dish-desc">mit Pommes-frites</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Poulet-Brust Kräuterschaum</span><span class="leader" aria-hidden="true"></span><span class="price">27.50</span></div>
-                      <p class="dish-desc">Pommes-frites · Gemüse</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Poulet Cordon bleu</span><span class="leader" aria-hidden="true"></span><span class="price">34.50</span></div>
-                      <p class="dish-desc">Schinken &amp; Käse · Pommes-frites · Gemüse</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Poulet-Brust im Speckmantel</span><span class="leader" aria-hidden="true"></span><span class="price">36.50</span></div>
-                      <p class="dish-desc">Brie · Rohschinken &amp; Dörrtomaten · Pommes-frites · Gemüse</p>
-                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Chicken Nuggets — 10 Stk.</span><span class="leader" aria-hidden="true"></span><span class="price">18.00</span></div><p class="dish-desc">mit Pommes-frites</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Poulet-Brust Kräuterschaum</span><span class="leader" aria-hidden="true"></span><span class="price">27.50</span></div><p class="dish-desc">Pommes-frites · Gemüse</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Poulet Cordon bleu</span><span class="leader" aria-hidden="true"></span><span class="price">34.50</span></div><p class="dish-desc">Schinken &amp; Käse · Pommes-frites · Gemüse</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Poulet-Brust im Speckmantel</span><span class="leader" aria-hidden="true"></span><span class="price">36.50</span></div><p class="dish-desc">Brie · Rohschinken &amp; Dörrtomaten · Pommes-frites · Gemüse</p></li>
                   </ul>
                 </div>
-                <span class="page-num">3</span>
+                <span class="page-num">iii</span>
               </article>
 
-              <!-- ─── Page 4: vom Rind & vom Fisch ─── -->
-              <article class="menu-page-card" data-page="3" data-title="vom Rind & vom Fisch">
+              <!-- 4: vom Rind & vom Fisch -->
+              <article class="menu-page-card" data-page="3" data-title="vom Rind &amp; vom Fisch">
                 <div class="page-paper">
-                  <header class="menu-section-head">
-                    <span class="ornament-line"></span>
-                    <h3>vom Rind</h3>
-                    <span class="ornament-line"></span>
-                  </header>
+                  <header class="menu-section-head"><span class="ornament-line"></span><h3>vom Rind</h3><span class="ornament-line"></span></header>
                   <ul class="menu-list">
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Entrecote Kräuterschaum — 200 gr</span><span class="leader" aria-hidden="true"></span><span class="price">44.00</span></div>
-                      <p class="dish-desc">Kroketten · Gemüse</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Entrecote Kräuterschaum — 300 gr</span><span class="leader" aria-hidden="true"></span><span class="price">48.00</span></div>
-                      <p class="dish-desc">Kroketten · Gemüse</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Stroganoff</span><span class="leader" aria-hidden="true"></span><span class="price">36.00</span></div>
-                      <p class="dish-desc">Spätzli · Gemüse</p>
-                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Entrecote Kräuterschaum — 200 gr</span><span class="leader" aria-hidden="true"></span><span class="price">44.00</span></div><p class="dish-desc">Kroketten · Gemüse</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Entrecote Kräuterschaum — 300 gr</span><span class="leader" aria-hidden="true"></span><span class="price">48.00</span></div><p class="dish-desc">Kroketten · Gemüse</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Stroganoff</span><span class="leader" aria-hidden="true"></span><span class="price">36.00</span></div><p class="dish-desc">Spätzli · Gemüse</p></li>
                   </ul>
-
-                  <header class="menu-section-head menu-section-head--second">
-                    <span class="ornament-line"></span>
-                    <h3>vom Fisch</h3>
-                    <span class="ornament-line"></span>
-                  </header>
+                  <header class="menu-section-head menu-section-head--second"><span class="ornament-line"></span><h3>vom Fisch</h3><span class="ornament-line"></span></header>
                   <ul class="menu-list">
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Lachsforelle · Zitronenbutter</span><span class="leader" aria-hidden="true"></span><span class="price">35.50</span></div>
-                      <p class="dish-desc">Weissweinrisotto · Gemüse</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Hausgemachte Zanderknusperli</span><span class="leader" aria-hidden="true"></span><span class="price">28.50</span></div>
-                      <p class="dish-desc">Tartarsauce · Pommes-frites · Gemüse oder Fitnessteller</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Black Tiger (Riesencrevetten)</span><span class="leader" aria-hidden="true"></span><span class="price">33.00</span></div>
-                      <p class="dish-desc">Nudeln · Dörrtomaten · Spinat · Knoblauch · Sambal · Parmesan</p>
-                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Lachsforelle · Zitronenbutter</span><span class="leader" aria-hidden="true"></span><span class="price">35.50</span></div><p class="dish-desc">Weissweinrisotto · Gemüse</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Hausgemachte Zanderknusperli</span><span class="leader" aria-hidden="true"></span><span class="price">28.50</span></div><p class="dish-desc">Tartarsauce · Pommes-frites · Gemüse oder Fitnessteller</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Black Tiger (Riesencrevetten)</span><span class="leader" aria-hidden="true"></span><span class="price">33.00</span></div><p class="dish-desc">Nudeln · Dörrtomaten · Spinat · Knoblauch · Sambal · Parmesan</p></li>
                   </ul>
                 </div>
-                <span class="page-num">4</span>
+                <span class="page-num">iv</span>
               </article>
 
-              <!-- ─── Page 5: Röschti & Vegetarisch ─── -->
-              <article class="menu-page-card" data-page="4" data-title="Röschti & Vegetarisch">
+              <!-- 5: Röschti & Vegetarisch -->
+              <article class="menu-page-card" data-page="4" data-title="Röschti &amp; Vegetarisch">
                 <div class="page-paper">
-                  <header class="menu-section-head">
-                    <span class="ornament-line"></span>
-                    <h3>Röschti esch&rsquo;s Gröschti</h3>
-                    <span class="ornament-line"></span>
-                  </header>
+                  <header class="menu-section-head"><span class="ornament-line"></span><h3>Röschti esch&rsquo;s Gröschti</h3><span class="ornament-line"></span></header>
                   <ul class="menu-list">
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Älpler-Rösti</span><span class="leader" aria-hidden="true"></span><span class="price">23.50</span></div>
-                      <p class="dish-desc">Schinken · Käse · Spiegelei</p>
-                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Älpler-Rösti</span><span class="leader" aria-hidden="true"></span><span class="price">23.50</span></div><p class="dish-desc">Schinken · Käse · Spiegelei</p></li>
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Rösti — 2 Stk. Spiegelei</span><span class="leader" aria-hidden="true"></span><span class="price">20.50</span></div></li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Gemüse-Rösti</span><span class="leader" aria-hidden="true"></span><span class="price">22.50</span></div>
-                      <p class="dish-desc">Käse · Spiegelei</p>
-                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Gemüse-Rösti</span><span class="leader" aria-hidden="true"></span><span class="price">22.50</span></div><p class="dish-desc">Käse · Spiegelei</p></li>
                   </ul>
-
-                  <header class="menu-section-head menu-section-head--second">
-                    <span class="ornament-line"></span>
-                    <h3>Vegetarisch</h3>
-                    <span class="ornament-line"></span>
-                  </header>
+                  <header class="menu-section-head menu-section-head--second"><span class="ornament-line"></span><h3>Vegetarisch</h3><span class="ornament-line"></span></header>
                   <ul class="menu-list">
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Gemüseteller mit Kroketten</span><span class="leader" aria-hidden="true"></span><span class="price">25.50</span></div></li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Frühlingsrollen</span><span class="leader" aria-hidden="true"></span><span class="price">24.50</span></div>
-                      <p class="dish-desc">Sweet &amp; Chilisauce · Fitness-Teller</p>
-                    </li>
-                    <li class="menu-item">
-                      <div class="menu-item-row"><span class="dish">Gefüllte Champignon</span><span class="leader" aria-hidden="true"></span><span class="price">27.50</span></div>
-                      <p class="dish-desc">Zucchetti · Peperoni · Käse · Weissweinrisotto · Gemüse</p>
-                    </li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Frühlingsrollen</span><span class="leader" aria-hidden="true"></span><span class="price">24.50</span></div><p class="dish-desc">Sweet &amp; Chilisauce · Fitness-Teller</p></li>
+                    <li class="menu-item"><div class="menu-item-row"><span class="dish">Gefüllte Champignon</span><span class="leader" aria-hidden="true"></span><span class="price">27.50</span></div><p class="dish-desc">Zucchetti · Peperoni · Käse · Weissweinrisotto · Gemüse</p></li>
                     <li class="menu-item"><div class="menu-item-row"><span class="dish">Risotto Parmesan</span><span class="leader" aria-hidden="true"></span><span class="price">18.50</span></div></li>
                   </ul>
                 </div>
-                <span class="page-num">5</span>
+                <span class="page-num">v</span>
               </article>
 
-              <!-- ─── Page 6: Herkunft & Lieferanten ─── -->
+              <!-- 6: Herkunft & Lieferanten -->
               <article class="menu-page-card menu-page-card--info" data-page="5" data-title="Herkunft &amp; Lieferanten">
                 <div class="page-paper">
-                  <header class="menu-section-head">
-                    <span class="ornament-line"></span>
-                    <h3>Herkunft</h3>
-                    <span class="ornament-line"></span>
-                  </header>
+                  <header class="menu-section-head"><span class="ornament-line"></span><h3>Herkunft</h3><span class="ornament-line"></span></header>
                   <dl class="declaration">
                     <div><dt>Schwein</dt><dd>Schweiz</dd></div>
                     <div><dt>Poulet</dt><dd>Schweiz · Bell</dd></div>
@@ -403,12 +238,7 @@
                     <div><dt>Fisch</dt><dd>CH · EE · DE · NO</dd></div>
                     <div><dt>Crevetten</dt><dd>Vietnam</dd></div>
                   </dl>
-
-                  <header class="menu-section-head menu-section-head--second">
-                    <span class="ornament-line"></span>
-                    <h3>Lieferanten</h3>
-                    <span class="ornament-line"></span>
-                  </header>
+                  <header class="menu-section-head menu-section-head--second"><span class="ornament-line"></span><h3>Lieferanten</h3><span class="ornament-line"></span></header>
                   <ul class="suppliers">
                     <li><span class="sup-name">Bäckerei Stadelmann</span><span class="sup-place">Zell</span></li>
                     <li><span class="sup-name">Bäckerei Birrer</span><span class="sup-place">Zell</span></li>
@@ -422,7 +252,7 @@
                     <li><span class="sup-name">Ziswiler Kurt Getränke</span><span class="sup-place">Ettiswil</span></li>
                   </ul>
                 </div>
-                <span class="page-num">6</span>
+                <span class="page-num">vi</span>
               </article>
 
             </div>
@@ -430,7 +260,7 @@
         </article>
 
         <button class="flip-btn flip-next" type="button" aria-label="Nächste Seite">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </button>
       </div>
 
@@ -450,330 +280,120 @@
       </nav>
 
       <div class="menu-meta">
-        <p class="menu-foot">Für Informationen zu Allergenen wenden Sie sich an unser Personal · Preise in CHF inkl. 8.1&nbsp;% MwSt.</p>
-        <a class="pdf-link" href="https://fischfischbach.ch/wp-content/uploads/Speisekarte-2025.pdf" target="_blank" rel="noopener">
-          Speisekarte als PDF herunterladen ↗
-        </a>
+        <p class="menu-foot">Allergene auf Anfrage · Preise in CHF inkl. 8.1&nbsp;% MwSt.</p>
+        <a class="pdf-link" href="https://fischfischbach.ch/wp-content/uploads/Speisekarte-2025.pdf" target="_blank" rel="noopener">Karte als PDF ↗</a>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ==================== SCENE 5 — HOURS ==================== -->
-  <section id="hours" class="scene scene-hours">
-    <div class="ambient-drift" aria-hidden="true">
-      <span></span><span></span><span></span><span></span>
-    </div>
 
-    <div class="hours-grid">
-      <div class="hours-text">
-        <p class="kicker" data-reveal>— Öffnungszeiten</p>
-        <h2 class="display" data-reveal data-delay="100">Wann wir <em>für Sie</em> da sind.</h2>
-      </div>
+<!-- ===== Modal: Reservation ===== -->
+<div class="modal" id="modal-reservation" hidden role="dialog" aria-modal="true" aria-labelledby="reservation-title">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-card" role="document">
+    <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <div class="modal-content">
+      <p class="kicker">— reservation</p>
+      <h2 class="display" id="reservation-title">tisch reservieren</h2>
+      <p class="legal-lead">am liebsten persönlich: <a href="tel:+41796363281">079 636 32 81</a> — oder formlos hier.</p>
 
-      <div class="hours-table" data-reveal data-delay="200">
-        <div class="hours-row">
-          <div class="hours-day">Montag</div>
-          <div class="hours-time">11:30 – 13:30</div>
-        </div>
-        <div class="hours-row muted">
-          <div class="hours-day">Dienstag</div>
-          <div class="hours-time">geschlossen</div>
-        </div>
-        <div class="hours-row muted">
-          <div class="hours-day">Mittwoch</div>
-          <div class="hours-time">geschlossen</div>
-        </div>
-        <div class="hours-row">
-          <div class="hours-day">Donnerstag</div>
-          <div class="hours-time">11:30 – 13:30 · 17:30 – 21:00</div>
-        </div>
-        <div class="hours-row">
-          <div class="hours-day">Freitag</div>
-          <div class="hours-time">11:30 – 13:30 · 17:30 – 21:00</div>
-        </div>
-        <div class="hours-row">
-          <div class="hours-day">Samstag</div>
-          <div class="hours-time">17:30 – 21:00</div>
-        </div>
-        <div class="hours-row muted">
-          <div class="hours-day">Sonntag</div>
-          <div class="hours-time">geschlossen</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== SCENE 5b — RESERVATION ==================== -->
-  <section id="reservation" class="scene scene-reservation">
-    <div class="layer layer-bg" data-speed="0.1" style="background-image:url('assets/gedeck.jpg')"></div>
-    <div class="layer layer-tint deep"></div>
-
-    <div class="reservation-inner">
-      <p class="kicker light" data-reveal>— Reservation</p>
-      <h2 class="display light" data-reveal data-delay="100">Tisch <em>reservieren</em></h2>
-      <p class="lead light" data-reveal data-delay="220">
-        Wir empfehlen, vorab zu reservieren. Füllen Sie das Formular aus oder rufen Sie uns
-        direkt an: <a class="phone-link" href="tel:+41796363281">079 636 32 81</a>.
-      </p>
-
-      <form class="reservation-form" data-reveal data-delay="380" novalidate>
+      <form class="reservation-form" novalidate>
         <div class="form-row form-row--3">
-          <label class="form-field">
-            <span class="form-label">Datum</span>
-            <input type="date" name="date" required />
-          </label>
-          <label class="form-field">
-            <span class="form-label">Uhrzeit</span>
+          <label class="form-field"><span class="form-label">Datum</span><input type="date" name="date" required /></label>
+          <label class="form-field"><span class="form-label">Uhrzeit</span>
             <select name="time" required>
               <option value="">— wählen —</option>
-              <optgroup label="Mittag">
-                <option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option>
-              </optgroup>
-              <optgroup label="Abend">
-                <option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option>
-                <option>19:30</option><option>20:00</option><option>20:30</option>
-              </optgroup>
+              <optgroup label="Mittag"><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option></optgroup>
+              <optgroup label="Abend"><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option></optgroup>
             </select>
           </label>
-          <label class="form-field">
-            <span class="form-label">Personen</span>
+          <label class="form-field"><span class="form-label">Personen</span>
             <select name="guests" required>
               <option value="">—</option>
               <option>1</option><option>2</option><option>3</option><option>4</option>
               <option>5</option><option>6</option><option>7</option><option>8</option>
-              <option value="9+">9 oder mehr</option>
+              <option value="9+">9+</option>
             </select>
           </label>
         </div>
-
         <div class="form-row form-row--2">
-          <label class="form-field">
-            <span class="form-label">Vor- und Nachname</span>
-            <input type="text" name="name" autocomplete="name" required />
-          </label>
-          <label class="form-field">
-            <span class="form-label">Telefon</span>
-            <input type="tel" name="phone" autocomplete="tel" required />
-          </label>
+          <label class="form-field"><span class="form-label">Vor- und Nachname</span><input type="text" name="name" autocomplete="name" required /></label>
+          <label class="form-field"><span class="form-label">Telefon</span><input type="tel" name="phone" autocomplete="tel" required /></label>
         </div>
-
-        <label class="form-field">
-          <span class="form-label">E-Mail</span>
-          <input type="email" name="email" autocomplete="email" required />
-        </label>
-
-        <label class="form-field">
-          <span class="form-label">Bemerkungen <span class="optional">(optional)</span></span>
-          <textarea name="notes" rows="3" placeholder="Allergien, Kinderstuhl, Anlass …"></textarea>
-        </label>
-
+        <label class="form-field"><span class="form-label">E-Mail</span><input type="email" name="email" autocomplete="email" required /></label>
+        <label class="form-field"><span class="form-label">Bemerkungen <span class="optional">(optional)</span></span><textarea name="notes" rows="3" placeholder="Allergien, Kinderstuhl, Anlass …"></textarea></label>
         <div class="form-actions">
-          <button type="submit" class="form-submit">
-            <span>Reservation anfragen</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </button>
-          <p class="form-note">Die Anfrage wird per E-Mail an info@fischfischbach.ch gesendet.</p>
+          <button type="submit" class="form-submit"><span>Anfrage senden</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+          <p class="form-note">Wird per E-Mail an info@fischfischbach.ch gesendet.</p>
         </div>
-
         <output class="form-status" hidden></output>
       </form>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ==================== SCENE 6 — CONTACT ==================== -->
-  <section id="contact" class="scene scene-contact">
-    <div class="layer layer-bg" data-speed="0.1" style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=2400&q=80')"></div>
-    <div class="layer layer-tint deep"></div>
 
-    <div class="contact-inner">
-      <h2 class="display xl light" data-zoom>
-        Bis <em>bald.</em>
-      </h2>
-      <p class="lead light" data-reveal data-delay="200">
-        Reservationen empfehlen wir — wir freuen uns auf Sie.
-      </p>
-
-      <div class="contact-grid" data-reveal data-delay="350">
-        <div>
-          <span class="label">Adresse</span>
-          <p>Hauptstrasse 9<br/>6145 Fischbach</p>
-        </div>
-        <div>
-          <span class="label">Telefon</span>
-          <p><a href="tel:+41796363281">079 636 32 81</a></p>
-        </div>
-        <div>
-          <span class="label">E-Mail</span>
-          <p><a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a></p>
-        </div>
-        <div>
-          <span class="label">Social</span>
-          <p>@restaurant_fisch_fischbach</p>
-        </div>
-      </div>
-
-      <p class="signoff" data-reveal data-delay="500">— Wir freuen uns auf Sie!</p>
-    </div>
-  </section>
-
-  <footer class="foot">
-    <div class="foot-inner">
-      <p>© <span id="year"></span> Restaurant Fisch Fischbach · Hauptstrasse 9, 6145 Fischbach</p>
-      <ul class="foot-links">
-        <li><button type="button" class="foot-link" data-modal="impressum">Impressum</button></li>
-        <li><button type="button" class="foot-link" data-modal="datenschutz">Datenschutz</button></li>
-      </ul>
-    </div>
-  </footer>
-
-  <!-- ===== Impressum modal ===== -->
-  <div class="modal" id="modal-impressum" hidden role="dialog" aria-modal="true" aria-labelledby="impressum-title">
-    <div class="modal-backdrop" data-modal-close></div>
-    <div class="modal-card" role="document">
-      <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-      </button>
-      <div class="modal-content">
-        <p class="kicker">— Rechtliches</p>
-        <h2 class="display" id="impressum-title">Impressum</h2>
-
-        <p class="legal-lead">Angaben gemäss schweizerischem Recht.</p>
-
-        <h3>Betreiber</h3>
-        <p>
-          Restaurant Fisch<br/>
-          Roger Giger &amp; Fisch-Team<br/>
-          Hauptstrasse 9<br/>
-          6145 Fischbach<br/>
-          Schweiz
-        </p>
-
-        <h3>Kontakt</h3>
-        <p>
-          Telefon: <a href="tel:+41796363281">079 636 32 81</a><br/>
-          E-Mail: <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a><br/>
-          Web: <a href="https://fischfischbach.ch" target="_blank" rel="noopener">fischfischbach.ch</a>
-        </p>
-
-        <h3>Verantwortlich für den Inhalt</h3>
-        <p>Roger Giger, Hauptstrasse 9, 6145 Fischbach.</p>
-
-        <h3>Haftung für Inhalte</h3>
-        <p>
-          Die Inhalte dieser Website wurden mit grösster Sorgfalt erstellt.
-          Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können
-          wir jedoch keine Gewähr übernehmen. Preise, Öffnungszeiten und
-          Speisekarte können sich kurzfristig ändern.
-        </p>
-
-        <h3>Haftung für Links</h3>
-        <p>
-          Diese Website enthält Links zu externen Websites Dritter, auf deren
-          Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten
-          Seiten ist stets der jeweilige Anbieter verantwortlich. Zum Zeitpunkt
-          der Verlinkung wurden die fremden Inhalte auf mögliche Rechtsverstösse
-          überprüft.
-        </p>
-
-        <h3>Urheberrecht</h3>
-        <p>
-          Die durch den Betreiber erstellten Inhalte und Werke auf dieser Website
-          unterliegen dem schweizerischen Urheberrecht. Vervielfältigung,
-          Bearbeitung, Verbreitung und jede Art der Verwertung ausserhalb der
-          Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des
-          jeweiligen Autors bzw. Erstellers.
-        </p>
-
-        <h3>Bildnachweise</h3>
-        <p>
-          Logo und Aussenaufnahme: Restaurant Fisch Fischbach.
-          Sfeerbilder: Unsplash (lizenzfrei).
-        </p>
-      </div>
+<!-- ===== Modal: Impressum ===== -->
+<div class="modal" id="modal-impressum" hidden role="dialog" aria-modal="true" aria-labelledby="impressum-title">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-card" role="document">
+    <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <div class="modal-content">
+      <p class="kicker">— rechtliches</p>
+      <h2 class="display" id="impressum-title">impressum</h2>
+      <p class="legal-lead">Angaben gemäss schweizerischem Recht.</p>
+      <h3>Betreiber</h3>
+      <p>Restaurant Fisch<br/>Roger Giger &amp; Fisch-Team<br/>Hauptstrasse 9, 6145 Fischbach<br/>Schweiz</p>
+      <h3>Kontakt</h3>
+      <p>Telefon: <a href="tel:+41796363281">079 636 32 81</a><br/>E-Mail: <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a><br/>Web: <a href="https://fischfischbach.ch" target="_blank" rel="noopener">fischfischbach.ch</a></p>
+      <h3>Verantwortlich für den Inhalt</h3>
+      <p>Roger Giger, Hauptstrasse 9, 6145 Fischbach.</p>
+      <h3>Haftung für Inhalte</h3>
+      <p>Die Inhalte dieser Website wurden mit grösster Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität können wir jedoch keine Gewähr übernehmen. Preise, Öffnungszeiten und Speisekarte können sich kurzfristig ändern.</p>
+      <h3>Haftung für Links</h3>
+      <p>Externe Links wurden zum Zeitpunkt der Verlinkung auf rechtswidrige Inhalte überprüft. Auf den aktuellen und zukünftigen Inhalt der verlinkten Seiten haben wir keinen Einfluss.</p>
+      <h3>Urheberrecht</h3>
+      <p>Die durch den Betreiber erstellten Inhalte und Werke unterliegen dem schweizerischen Urheberrecht. Vervielfältigung, Bearbeitung oder Verbreitung bedürfen der schriftlichen Zustimmung.</p>
+      <h3>Bildnachweise</h3>
+      <p>Logo und Aussenaufnahme: Restaurant Fisch Fischbach. Sfeerbilder: Unsplash (lizenzfrei).</p>
     </div>
   </div>
+</div>
 
-  <!-- ===== Datenschutz modal ===== -->
-  <div class="modal" id="modal-datenschutz" hidden role="dialog" aria-modal="true" aria-labelledby="datenschutz-title">
-    <div class="modal-backdrop" data-modal-close></div>
-    <div class="modal-card" role="document">
-      <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-      </button>
-      <div class="modal-content">
-        <p class="kicker">— Rechtliches</p>
-        <h2 class="display" id="datenschutz-title">Datenschutz&shy;erklärung</h2>
 
-        <p class="legal-lead">
-          Wir nehmen den Schutz Ihrer persönlichen Daten ernst. Diese
-          Datenschutzerklärung informiert Sie darüber, wie wir mit Ihren Daten
-          umgehen. Wir halten uns an das schweizerische Bundesgesetz über den
-          Datenschutz (DSG).
-        </p>
-
-        <h3>Verantwortliche Stelle</h3>
-        <p>
-          Restaurant Fisch · Roger Giger<br/>
-          Hauptstrasse 9, 6145 Fischbach<br/>
-          <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a> ·
-          <a href="tel:+41796363281">079 636 32 81</a>
-        </p>
-
-        <h3>Erhebung beim Besuch der Website</h3>
-        <p>
-          Bei jedem Aufruf werden vom Server automatisch technische
-          Informationen wie IP-Adresse, Datum und Uhrzeit des Zugriffs sowie
-          verwendeter Browser temporär gespeichert. Diese Daten dienen
-          ausschliesslich dem stabilen Betrieb der Website und werden nicht
-          zur Identifikation einzelner Personen verwendet.
-        </p>
-
-        <h3>Reservationsformular</h3>
-        <p>
-          Wenn Sie eine Reservation per Formular anfragen, übermitteln Sie uns
-          folgende Angaben: Name, Telefonnummer, E-Mail-Adresse, Datum, Uhrzeit,
-          Personenzahl und allfällige Bemerkungen. Diese Daten werden
-          ausschliesslich zur Bearbeitung Ihrer Anfrage verwendet, per E-Mail an
-          <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a>
-          übermittelt und nicht an Dritte weitergegeben. Wir bewahren die
-          Anfrage so lange auf, wie sie für die Reservation erforderlich ist.
-        </p>
-
-        <h3>Cookies</h3>
-        <p>
-          Diese Website setzt derzeit keine Tracking- oder Marketing-Cookies
-          ein. Sollte sich das in Zukunft ändern, informieren wir Sie an dieser
-          Stelle und holen Ihre Einwilligung ein.
-        </p>
-
-        <h3>Schriftarten und externe Inhalte</h3>
-        <p>
-          Wir verwenden Webfonts von Google Fonts. Beim Laden der Seite werden
-          Schriften vom Server von Google bezogen, wobei Ihre IP-Adresse
-          verarbeitet wird. Weitere Informationen finden Sie in der
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.
-          Sfeerbilder werden teilweise über Unsplash geladen.
-        </p>
-
-        <h3>Ihre Rechte</h3>
-        <p>
-          Sie haben jederzeit das Recht auf Auskunft über die zu Ihrer Person
-          gespeicherten Daten, auf Berichtigung unrichtiger Daten sowie auf
-          Löschung. Wenden Sie sich dafür formlos per E-Mail an
-          <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a>.
-        </p>
-
-        <h3>Änderungen</h3>
-        <p>
-          Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie
-          stets den aktuellen rechtlichen Anforderungen entspricht.
-        </p>
-
-        <p class="legal-meta">Stand: 10. Mai 2026</p>
-      </div>
+<!-- ===== Modal: Datenschutz ===== -->
+<div class="modal" id="modal-datenschutz" hidden role="dialog" aria-modal="true" aria-labelledby="datenschutz-title">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-card" role="document">
+    <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <div class="modal-content">
+      <p class="kicker">— rechtliches</p>
+      <h2 class="display" id="datenschutz-title">datenschutz&shy;erklärung</h2>
+      <p class="legal-lead">Wir nehmen den Schutz Ihrer Daten ernst und richten uns nach dem schweizerischen Bundesgesetz über den Datenschutz (DSG).</p>
+      <h3>Verantwortliche Stelle</h3>
+      <p>Restaurant Fisch · Roger Giger<br/>Hauptstrasse 9, 6145 Fischbach<br/><a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a> · <a href="tel:+41796363281">079 636 32 81</a></p>
+      <h3>Erhebung beim Besuch</h3>
+      <p>Bei jedem Aufruf werden vom Server automatisch technische Informationen wie IP-Adresse, Datum und Uhrzeit des Zugriffs sowie verwendeter Browser temporär gespeichert. Diese Daten dienen dem Betrieb der Website und werden nicht zur Identifikation einzelner Personen verwendet.</p>
+      <h3>Reservationsformular</h3>
+      <p>Bei einer Reservation übermitteln Sie uns Name, Telefonnummer, E-Mail-Adresse, Datum, Uhrzeit, Personenzahl und allfällige Bemerkungen. Diese Daten werden ausschliesslich zur Bearbeitung Ihrer Anfrage verwendet, per E-Mail an <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a> übermittelt und nicht an Dritte weitergegeben.</p>
+      <h3>Cookies</h3>
+      <p>Diese Website setzt derzeit keine Tracking- oder Marketing-Cookies ein.</p>
+      <h3>Schriftarten und Bilder</h3>
+      <p>Wir verwenden Webfonts von Google Fonts. Beim Laden werden Schriften vom Server von Google bezogen, wobei Ihre IP-Adresse verarbeitet wird. Mehr unter <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>. Sfeerbilder werden teilweise über Unsplash geladen.</p>
+      <h3>Ihre Rechte</h3>
+      <p>Sie haben das Recht auf Auskunft, Berichtigung und Löschung. Wenden Sie sich formlos per E-Mail an <a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a>.</p>
+      <p class="legal-meta">Stand: 10. Mai 2026</p>
     </div>
   </div>
+</div>
 
-  <script src="script.js?v=8"></script>
+<script src="script.js?v=9"></script>
 </body>
 </html>
