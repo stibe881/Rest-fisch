@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Fisch Fischbach — Gerne verwöhnen wir Sie</title>
+  <meta name="description" content="Restaurant Fisch Fischbach — feine Menüs aus gut bürgerlicher Küche. Hauptstrasse 9, 6145 Fischbach." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Progress rail -->
+  <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- Floating nav -->
+  <nav class="nav">
+    <a href="#hero" class="nav-brand">FISCH<span>·</span>FISCHBACH</a>
+    <ul class="nav-links">
+      <li><a href="#welcome">Willkommen</a></li>
+      <li><a href="#philosophy">Philosophie</a></li>
+      <li><a href="#menu">Angebot</a></li>
+      <li><a href="#hours">Öffnungszeiten</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- ==================== SCENE 1 — HERO ==================== -->
+  <section id="hero" class="scene scene-hero">
+    <div class="layer layer-bg" data-speed="0.15" style="background-image:url('https://images.unsplash.com/photo-1505144808419-1957a94ca61e?auto=format&fit=crop&w=2400&q=80')"></div>
+    <div class="layer layer-mid" data-speed="0.35" aria-hidden="true">
+      <svg viewBox="0 0 1440 600" preserveAspectRatio="none">
+        <path d="M0,420 C240,360 480,500 720,440 C960,380 1200,500 1440,420 L1440,600 L0,600 Z" fill="rgba(8,28,42,0.45)"/>
+      </svg>
+    </div>
+    <div class="layer layer-fore" data-speed="0.6" aria-hidden="true">
+      <svg viewBox="0 0 1440 600" preserveAspectRatio="none">
+        <path d="M0,520 C240,480 480,580 720,540 C960,500 1200,580 1440,520 L1440,600 L0,600 Z" fill="rgba(3,14,22,0.85)"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <p class="eyebrow" data-reveal>Hauptstrasse 9 · 6145 Fischbach</p>
+      <h1 class="hero-title" data-zoom>
+        <span class="word">Restaurant</span>
+        <span class="word italic">Fisch</span>
+        <span class="word">Fischbach</span>
+      </h1>
+      <p class="hero-tag" data-reveal data-delay="200">Feine Menüs aus unserer gut bürgerlichen Küche.</p>
+      <a href="#welcome" class="hero-arrow" aria-label="Weiterscrollen">
+        <span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 2 — WELCOME ==================== -->
+  <section id="welcome" class="scene scene-welcome">
+    <div class="parallax-stack">
+      <div class="layer layer-bg" data-speed="0.1" style="background-image:url('https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=2400&q=80')"></div>
+      <div class="layer layer-tint"></div>
+      <div class="floating-fish fish-1" data-speed="0.45" aria-hidden="true">
+        <svg viewBox="0 0 200 80"><path d="M10,40 C40,5 100,5 140,40 C100,75 40,75 10,40 Z M140,40 L185,15 L185,65 Z M50,40 a3,3 0 1,0 0.1,0" fill="rgba(255,255,255,0.18)"/></svg>
+      </div>
+      <div class="floating-fish fish-2" data-speed="0.7" aria-hidden="true">
+        <svg viewBox="0 0 200 80"><path d="M10,40 C40,5 100,5 140,40 C100,75 40,75 10,40 Z M140,40 L185,15 L185,65 Z M50,40 a3,3 0 1,0 0.1,0" fill="rgba(255,255,255,0.10)"/></svg>
+      </div>
+    </div>
+
+    <div class="welcome-content">
+      <h2 class="display" data-reveal>
+        <em>Gerne</em> verwöhnen<br/>wir <em>Sie.</em>
+      </h2>
+      <p class="lead" data-reveal data-delay="200">
+        Ein Ort am Wasser, an dem traditionelle Schweizer Küche auf
+        herzliche Gastfreundschaft trifft. Wir freuen uns auf Sie.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 3 — PHILOSOPHY ==================== -->
+  <section id="philosophy" class="scene scene-philosophy">
+    <div class="split">
+      <div class="split-visual">
+        <div class="depth-stack">
+          <div class="depth-layer depth-back" data-speed="0.2" style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1600&q=80')"></div>
+          <div class="depth-layer depth-mid" data-speed="0.4" style="background-image:url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=1400&q=80')"></div>
+          <div class="depth-layer depth-front" data-speed="0.65" style="background-image:url('https://images.unsplash.com/photo-1535400875775-d04dc73c8c38?auto=format&fit=crop&w=1200&q=80')"></div>
+        </div>
+      </div>
+      <div class="split-text">
+        <p class="kicker" data-reveal>— unsere Philosophie</p>
+        <h2 class="display" data-reveal data-delay="100">Aus der Region.<br/><em>Mit Sorgfalt.</em></h2>
+        <p class="body" data-reveal data-delay="250">
+          Es ist uns wichtig, Lieferanten mit Produkten aus der Region zu
+          berücksichtigen. So entstehen feine Menüs aus unserer gut
+          bürgerlichen Küche — ehrlich, saisonal und mit Liebe zum Detail
+          zubereitet.
+        </p>
+        <ul class="pill-row" data-reveal data-delay="400">
+          <li>Regional</li>
+          <li>Saisonal</li>
+          <li>Hausgemacht</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 4 — MENU / OFFER ==================== -->
+  <section id="menu" class="scene scene-menu">
+    <div class="layer layer-bg" data-speed="0.15" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2400&q=80')"></div>
+    <div class="layer layer-tint dark"></div>
+
+    <div class="menu-inner">
+      <p class="kicker light" data-reveal>— Angebot</p>
+      <h2 class="display light" data-reveal data-delay="100">Was wir <em>servieren.</em></h2>
+
+      <div class="cards">
+        <article class="card" data-reveal data-delay="100">
+          <span class="card-num">01</span>
+          <h3>À la carte</h3>
+          <p>Eine sorgfältig kuratierte Karte mit Klassikern und saisonalen Spezialitäten.</p>
+        </article>
+        <article class="card" data-reveal data-delay="220">
+          <span class="card-num">02</span>
+          <h3>Mittagsmenüs</h3>
+          <p>Mo, Do & Fr von 11:30 – 13:30. Frisch zubereitet, fair und unkompliziert.</p>
+        </article>
+        <article class="card" data-reveal data-delay="340">
+          <span class="card-num">03</span>
+          <h3>Bankette & Gruppen</h3>
+          <p>Familienfeiern, Firmenanlässe oder Carreisen — Bankettkarte auf Anfrage.</p>
+        </article>
+        <article class="card" data-reveal data-delay="460">
+          <span class="card-num">04</span>
+          <h3>Geschenkgutscheine</h3>
+          <p>Schenken Sie genussvolle Stunden zu zweit oder im Kreis der Familie.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 5 — HOURS ==================== -->
+  <section id="hours" class="scene scene-hours">
+    <div class="ambient-drift" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="hours-grid">
+      <div class="hours-text">
+        <p class="kicker" data-reveal>— Öffnungszeiten</p>
+        <h2 class="display" data-reveal data-delay="100">Wann wir <em>für Sie</em> da sind.</h2>
+      </div>
+
+      <div class="hours-table" data-reveal data-delay="200">
+        <div class="hours-row">
+          <div class="hours-day">Montag</div>
+          <div class="hours-time">11:30 – 13:30</div>
+        </div>
+        <div class="hours-row muted">
+          <div class="hours-day">Dienstag</div>
+          <div class="hours-time">geschlossen</div>
+        </div>
+        <div class="hours-row muted">
+          <div class="hours-day">Mittwoch</div>
+          <div class="hours-time">geschlossen</div>
+        </div>
+        <div class="hours-row">
+          <div class="hours-day">Donnerstag</div>
+          <div class="hours-time">11:30 – 13:30 · 17:30 – 21:00</div>
+        </div>
+        <div class="hours-row">
+          <div class="hours-day">Freitag</div>
+          <div class="hours-time">11:30 – 13:30 · 17:30 – 21:00</div>
+        </div>
+        <div class="hours-row">
+          <div class="hours-day">Samstag</div>
+          <div class="hours-time">17:30 – 21:00</div>
+        </div>
+        <div class="hours-row muted">
+          <div class="hours-day">Sonntag</div>
+          <div class="hours-time">geschlossen</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 6 — CONTACT ==================== -->
+  <section id="contact" class="scene scene-contact">
+    <div class="layer layer-bg" data-speed="0.1" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2400&q=80')"></div>
+    <div class="layer layer-tint deep"></div>
+
+    <div class="contact-inner">
+      <h2 class="display xl light" data-zoom>
+        Bis <em>bald.</em>
+      </h2>
+      <p class="lead light" data-reveal data-delay="200">
+        Reservationen empfehlen wir — wir freuen uns auf Sie.
+      </p>
+
+      <div class="contact-grid" data-reveal data-delay="350">
+        <div>
+          <span class="label">Adresse</span>
+          <p>Hauptstrasse 9<br/>6145 Fischbach</p>
+        </div>
+        <div>
+          <span class="label">Telefon</span>
+          <p><a href="tel:+41796363281">079 636 32 81</a></p>
+        </div>
+        <div>
+          <span class="label">E-Mail</span>
+          <p><a href="mailto:info@fischfischbach.ch">info@fischfischbach.ch</a></p>
+        </div>
+        <div>
+          <span class="label">Social</span>
+          <p>@restaurant_fisch_fischbach</p>
+        </div>
+      </div>
+
+      <p class="signoff" data-reveal data-delay="500">— Wir freuen uns auf Sie!</p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>© <span id="year"></span> Restaurant Fisch Fischbach · Hauptstrasse 9, 6145 Fischbach</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

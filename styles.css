@@ -1,0 +1,600 @@
+/* ============================================================
+   Restaurant Fisch Fischbach — Cinematic scroll experience
+   ============================================================ */
+
+:root {
+  --bg-deep:   #050d14;
+  --bg-night:  #0a1c28;
+  --bg-mid:    #11364a;
+  --bg-soft:   #f3ede1;
+  --paper:     #fbf8f1;
+  --ink:       #0a1c28;
+  --ink-soft:  #3b4a55;
+  --accent:    #c89b5b;
+  --accent-2:  #7eb6c9;
+
+  --ease:      cubic-bezier(.2, .7, .15, 1);
+  --ease-soft: cubic-bezier(.4, .0, .2, 1);
+  --t-quick:   .6s;
+  --t-normal:  .9s;
+  --t-slow:    1.2s;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg-deep);
+  color: var(--ink);
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  background: var(--bg-deep);
+  color: var(--paper);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; transition: color .4s var(--ease); }
+a:hover { color: var(--accent); }
+
+/* ------------------ Scroll progress rail ------------------ */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px; z-index: 100;
+  background: rgba(255,255,255,0.06);
+}
+.scroll-progress span {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width .15s linear;
+}
+
+/* ------------------ Floating nav ------------------ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 2.4rem;
+  font-size: .82rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition: background var(--t-quick) var(--ease), padding var(--t-quick) var(--ease);
+  backdrop-filter: blur(0px);
+}
+.nav.scrolled {
+  background: rgba(5,13,20,0.72);
+  backdrop-filter: blur(14px);
+  padding: 1rem 2.4rem;
+}
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: .22em;
+  color: var(--paper);
+}
+.nav-brand span { color: var(--accent); margin: 0 .2em; }
+.nav-links {
+  display: flex; gap: 1.6rem; list-style: none;
+}
+.nav-links a { color: rgba(255,255,255,0.75); font-size: .72rem; }
+.nav-links a:hover { color: var(--accent); }
+
+@media (max-width: 720px) {
+  .nav-links { display: none; }
+  .nav { padding: 1rem 1.2rem; }
+}
+
+/* ============================================================
+   SCENE STRUCTURE
+   ============================================================ */
+.scene {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.layer {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+.layer-bg     { z-index: 1;  transform: scale(1.15); }
+.layer-mid    { z-index: 2; }
+.layer-fore   { z-index: 3; }
+.layer-tint {
+  z-index: 4;
+  background: linear-gradient(180deg, rgba(5,13,20,0.55) 0%, rgba(5,13,20,0.85) 100%);
+  pointer-events: none;
+}
+.layer-tint.dark {
+  background: linear-gradient(180deg, rgba(5,13,20,0.78) 0%, rgba(5,13,20,0.92) 100%);
+}
+.layer-tint.deep {
+  background: linear-gradient(180deg, rgba(5,13,20,0.85) 0%, rgba(5,13,20,0.96) 100%);
+}
+
+/* ============================================================
+   SCENE 1 — HERO
+   ============================================================ */
+.scene-hero {
+  height: 100vh;
+  background: var(--bg-deep);
+}
+.scene-hero .layer-mid svg,
+.scene-hero .layer-fore svg {
+  position: absolute;
+  bottom: -1px;
+  width: 100%;
+  height: 60%;
+}
+.scene-hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(5,13,20,0.35) 0%, rgba(5,13,20,0.55) 50%, rgba(5,13,20,0.95) 100%);
+  z-index: 4; pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 10;
+  text-align: center;
+  padding: 0 2rem;
+  max-width: 1100px;
+}
+.eyebrow {
+  font-size: .78rem;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.6rem;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(3rem, 9vw, 8.5rem);
+  line-height: .95;
+  letter-spacing: -.01em;
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: .05em;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.4);
+}
+.hero-title .word { display: block; }
+.hero-title .italic { font-style: italic; color: var(--accent); }
+.hero-tag {
+  margin-top: 2rem;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  letter-spacing: .05em;
+  color: rgba(255,255,255,0.8);
+  font-weight: 300;
+}
+.hero-arrow {
+  display: inline-block;
+  margin-top: 4rem;
+  width: 28px; height: 48px;
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 14px;
+  position: relative;
+  transition: all var(--t-quick) var(--ease);
+}
+.hero-arrow span {
+  position: absolute;
+  top: 8px; left: 50%;
+  width: 3px; height: 8px;
+  background: var(--paper);
+  border-radius: 3px;
+  transform: translateX(-50%);
+  animation: scroll-cue 1.6s var(--ease) infinite;
+}
+.hero-arrow:hover { border-color: var(--accent); transform: translateY(4px); }
+@keyframes scroll-cue {
+  0%   { opacity: 0; transform: translate(-50%, 0); }
+  35%  { opacity: 1; }
+  70%  { opacity: 1; transform: translate(-50%, 16px); }
+  100% { opacity: 0; transform: translate(-50%, 22px); }
+}
+
+/* ============================================================
+   SCENE 2 — WELCOME
+   ============================================================ */
+.scene-welcome {
+  background: var(--bg-night);
+  padding: 8rem 0;
+}
+.parallax-stack { position: absolute; inset: 0; }
+.scene-welcome .layer-bg {
+  opacity: .55;
+  filter: saturate(.7) blur(1px);
+}
+.scene-welcome .layer-tint {
+  background: linear-gradient(180deg, rgba(10,28,40,0.7) 0%, rgba(10,28,40,0.92) 100%);
+}
+
+.floating-fish {
+  position: absolute;
+  width: 220px;
+  opacity: .8;
+  will-change: transform;
+}
+.fish-1 { top: 22%; left: -120px; transform: translateX(0); }
+.fish-2 { top: 65%; right: -160px; transform: translateX(0) scaleX(-1); width: 160px; }
+
+.welcome-content {
+  position: relative; z-index: 10;
+  max-width: 880px;
+  text-align: center;
+  padding: 0 2rem;
+}
+.display {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -.01em;
+  color: var(--paper);
+}
+.display em { font-style: italic; color: var(--accent); font-weight: 500; }
+.display.light { color: var(--paper); }
+.display.xl { font-size: clamp(3.6rem, 12vw, 10rem); }
+
+.lead {
+  margin-top: 2rem;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.7;
+  color: rgba(255,255,255,0.78);
+  max-width: 640px;
+  margin-left: auto; margin-right: auto;
+}
+.lead.light { color: rgba(255,255,255,0.85); }
+
+/* ============================================================
+   SCENE 3 — PHILOSOPHY
+   ============================================================ */
+.scene-philosophy {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 8rem 0;
+  min-height: 100vh;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 3rem;
+}
+@media (max-width: 880px) {
+  .split { grid-template-columns: 1fr; gap: 3rem; padding: 0 1.5rem; }
+}
+
+.split-visual {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  perspective: 1200px;
+}
+.depth-stack {
+  position: relative;
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+}
+.depth-layer {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  box-shadow: 0 30px 80px -20px rgba(10,28,40,0.4);
+  will-change: transform;
+}
+.depth-back {
+  inset: 0;
+  transform: translateZ(-60px) scale(.95);
+  filter: brightness(.85);
+}
+.depth-mid {
+  top: 8%; left: 12%; width: 75%; height: 70%;
+  transform: translateZ(0px);
+  z-index: 2;
+}
+.depth-front {
+  bottom: 6%; right: 4%; width: 50%; height: 45%;
+  transform: translateZ(60px);
+  z-index: 3;
+  border: 6px solid var(--paper);
+}
+
+.kicker {
+  font-size: .78rem;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.kicker.light { color: var(--accent); }
+
+.split-text .display { color: var(--ink); }
+.split-text .display em { color: var(--accent); }
+.body {
+  margin-top: 1.6rem;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  max-width: 480px;
+}
+.pill-row {
+  display: flex; gap: .6rem; flex-wrap: wrap;
+  list-style: none;
+  margin-top: 2rem;
+}
+.pill-row li {
+  padding: .5rem 1.1rem;
+  border: 1px solid rgba(10,28,40,0.18);
+  border-radius: 100px;
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: all var(--t-quick) var(--ease);
+}
+.pill-row li:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   SCENE 4 — MENU / OFFER
+   ============================================================ */
+.scene-menu {
+  padding: 10rem 0;
+  background: var(--bg-night);
+}
+.scene-menu .layer-bg {
+  opacity: .45;
+  filter: saturate(.75);
+}
+.menu-inner {
+  position: relative; z-index: 10;
+  max-width: 1280px;
+  width: 100%;
+  padding: 0 3rem;
+  text-align: center;
+}
+@media (max-width: 720px) {
+  .menu-inner { padding: 0 1.5rem; }
+}
+.cards {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.4rem;
+  text-align: left;
+}
+.card {
+  position: relative;
+  padding: 2.4rem 1.8rem 2rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  backdrop-filter: blur(6px);
+  transition: transform var(--t-quick) var(--ease), background var(--t-quick) var(--ease), border-color var(--t-quick) var(--ease);
+}
+.card:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(200,155,91,0.4);
+}
+.card-num {
+  position: absolute;
+  top: 1.4rem; right: 1.4rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--accent);
+  opacity: .7;
+}
+.card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--paper);
+  margin-bottom: .8rem;
+}
+.card p {
+  color: rgba(255,255,255,0.7);
+  font-size: .95rem;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   SCENE 5 — HOURS
+   ============================================================ */
+.scene-hours {
+  background: linear-gradient(180deg, var(--paper) 0%, #efe6d4 100%);
+  color: var(--ink);
+  padding: 10rem 0;
+  position: relative;
+}
+.ambient-drift {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ambient-drift span {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,155,91,0.25), transparent 70%);
+  filter: blur(60px);
+  animation: drift 18s ease-in-out infinite;
+}
+.ambient-drift span:nth-child(1){ width:480px;height:480px; top:-10%; left:-10%; animation-delay:0s;}
+.ambient-drift span:nth-child(2){ width:360px;height:360px; bottom:-10%; right:-5%; animation-delay:-6s;}
+.ambient-drift span:nth-child(3){ width:280px;height:280px; top:40%;    left:60%;  animation-delay:-12s;}
+.ambient-drift span:nth-child(4){ width:200px;height:200px; bottom:20%; left:10%;  animation-delay:-3s;}
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: .6; }
+  50%      { transform: translate(40px, -30px) scale(1.15); opacity: .9; }
+}
+
+.hours-grid {
+  position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1180px;
+  width: 100%;
+  padding: 0 3rem;
+  align-items: start;
+}
+@media (max-width: 880px) {
+  .hours-grid { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 1.5rem; }
+}
+.hours-text .display { color: var(--ink); }
+.hours-text .display em { color: var(--accent); }
+
+.hours-table {
+  border-top: 1px solid rgba(10,28,40,0.15);
+}
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid rgba(10,28,40,0.1);
+  transition: padding-left var(--t-quick) var(--ease);
+}
+.hours-row:hover { padding-left: .8rem; }
+.hours-row.muted { opacity: .4; }
+.hours-day {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.hours-time {
+  font-size: .92rem;
+  letter-spacing: .04em;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   SCENE 6 — CONTACT
+   ============================================================ */
+.scene-contact {
+  padding: 10rem 0 6rem;
+  min-height: 100vh;
+  background: var(--bg-deep);
+}
+.scene-contact .layer-bg {
+  opacity: .45;
+  transform: scale(1.2);
+  filter: saturate(.6);
+}
+.contact-inner {
+  position: relative; z-index: 10;
+  max-width: 1100px;
+  width: 100%;
+  padding: 0 3rem;
+  text-align: center;
+}
+@media (max-width: 720px) {
+  .contact-inner { padding: 0 1.5rem; }
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2.5rem;
+  margin-top: 5rem;
+  text-align: left;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 3rem;
+}
+.contact-grid .label {
+  display: block;
+  font-size: .72rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .8rem;
+}
+.contact-grid p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  color: var(--paper);
+  line-height: 1.5;
+}
+.contact-grid a:hover { color: var(--accent); }
+
+.signoff {
+  margin-top: 4rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: .04em;
+}
+
+.foot {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-size: .76rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  background: var(--bg-deep);
+}
+
+/* ============================================================
+   REVEAL / ZOOM ANIMATIONS
+   ============================================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity var(--t-slow) var(--ease),
+    transform var(--t-slow) var(--ease);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-zoom] {
+  opacity: 0;
+  transform: scale(.82);
+  filter: blur(8px);
+  transition:
+    opacity var(--t-slow) var(--ease),
+    transform var(--t-slow) var(--ease),
+    filter var(--t-slow) var(--ease);
+}
+[data-zoom].is-visible {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+/* Stagger children of cards row */
+.cards .card { transition-delay: 0s; }
+
+/* ============================================================
+   ACCESSIBILITY — reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: opacity .3s ease !important; }
+  [data-reveal], [data-zoom] { opacity: 1; transform: none; filter: none; }
+  html { scroll-behavior: auto; }
+}
