@@ -148,13 +148,40 @@
   }
 
   /* -----------------------------------------------------------
-   * 4. Floating nav background after scroll
+   * 4. Floating nav: scroll background + mobile drawer toggle
    * --------------------------------------------------------- */
   const nav = document.querySelector('.nav');
+  const navToggle = document.querySelector('.nav-toggle');
+  const navBackdrop = document.querySelector('.nav-backdrop');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
   function updateNav() {
     if (!nav) return;
     nav.classList.toggle('scrolled', scrollY > 60);
   }
+
+  function setNavOpen(open) {
+    if (!nav) return;
+    nav.classList.toggle('is-open', open);
+    document.body.classList.toggle('nav-open', open);
+    if (navToggle) {
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'Menü schliessen' : 'Menü öffnen');
+    }
+  }
+
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      setNavOpen(!nav.classList.contains('is-open'));
+    });
+  }
+  if (navBackdrop) {
+    navBackdrop.addEventListener('click', () => setNavOpen(false));
+  }
+  navLinks.forEach((a) => a.addEventListener('click', () => setNavOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav && nav.classList.contains('is-open')) setNavOpen(false);
+  });
 
   /* -----------------------------------------------------------
    * 5. Card stagger reveal — extra polish (cinematic timing)
