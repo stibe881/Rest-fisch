@@ -385,6 +385,43 @@
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* -----------------------------------------------------------
+   * 8. Cookie banner — only technical cookies, simple ack
+   * --------------------------------------------------------- */
+  const cookieBanner = document.getElementById('cookie-banner');
+  const cookieAccept = document.getElementById('cookie-accept');
+  const cookieReopen = document.getElementById('cookie-reopen');
+  const COOKIE_KEY   = 'fisch-cookies-acked';
+
+  function showCookieBanner() {
+    if (!cookieBanner) return;
+    cookieBanner.hidden = false;
+    requestAnimationFrame(() => cookieBanner.classList.add('is-visible'));
+  }
+  function hideCookieBanner() {
+    if (!cookieBanner) return;
+    cookieBanner.classList.remove('is-visible');
+    setTimeout(() => { cookieBanner.hidden = true; }, 1000);
+  }
+
+  // First visit? Show after a short pause so the page settles.
+  let alreadyAcked = false;
+  try { alreadyAcked = localStorage.getItem(COOKIE_KEY) === '1'; } catch (_) {}
+  if (!alreadyAcked) setTimeout(showCookieBanner, 1100);
+
+  if (cookieAccept) {
+    cookieAccept.addEventListener('click', () => {
+      try { localStorage.setItem(COOKIE_KEY, '1'); } catch (_) {}
+      hideCookieBanner();
+    });
+  }
+  if (cookieReopen) {
+    cookieReopen.addEventListener('click', () => {
+      try { localStorage.removeItem(COOKIE_KEY); } catch (_) {}
+      showCookieBanner();
+    });
+  }
+
   // First paint
   update();
   updateProgress();

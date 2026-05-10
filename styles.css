@@ -1629,6 +1629,169 @@ a:hover { color: var(--orange); }
 /* Lock body scroll while a modal is open */
 body.modal-open { overflow: hidden; }
 
+
+/* ============================================================
+   COOKIE BANNER  (matches Speisekarte paper-card aesthetic)
+   ============================================================ */
+.cookie-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 80;
+  width: min(740px, calc(100vw - 2rem));
+  transform: translateX(-50%) translateY(140%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 1s var(--ease),
+    opacity 1s var(--ease);
+}
+.cookie-banner[hidden] { display: block; visibility: hidden; }
+.cookie-banner.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.cookie-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.4rem;
+  align-items: center;
+  padding: 1.4rem 1.6rem 1.4rem 1.4rem;
+  background:
+    radial-gradient(ellipse at 25% 20%, rgba(255,255,255,0.5), transparent 55%),
+    linear-gradient(135deg, #fbf5e6 0%, #f5e9c8 100%);
+  border-radius: 8px;
+  box-shadow:
+    0 30px 60px -20px rgba(42,45,124,0.42),
+    0 12px 26px -10px rgba(232,93,44,0.22),
+    inset 0 0 0 1px rgba(232,93,44,0.20),
+    inset 0 0 0 6px rgba(251,245,230,0.6),
+    inset 0 0 0 7px rgba(232,93,44,0.18);
+  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.cookie-card::after {
+  /* subtle paper grain */
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg,  transparent 0 2px, rgba(0,0,0,0.012) 2px 3px),
+    repeating-linear-gradient(90deg, transparent 0 2px, rgba(0,0,0,0.008) 2px 3px);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.cookie-icon {
+  width: 46px; height: 46px;
+  flex-shrink: 0;
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cookie-icon svg { width: 100%; height: 100%; }
+
+.cookie-text {
+  position: relative;
+  min-width: 0;
+}
+.cookie-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin: 0 0 .35rem;
+  letter-spacing: .005em;
+}
+.cookie-text p {
+  font-family: 'Lora', Georgia, serif;
+  font-size: .9rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.cookie-text strong {
+  font-weight: 600;
+  color: var(--navy);
+  font-style: italic;
+}
+.cookie-link {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--orange);
+  border-bottom: 1px dotted rgba(232,93,44,0.5);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-bottom-style .35s var(--ease), color .35s var(--ease);
+}
+.cookie-link:hover {
+  border-bottom-style: solid;
+  color: var(--orange-deep);
+}
+
+.cookie-actions {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  position: relative;
+}
+.cookie-btn {
+  appearance: none;
+  cursor: pointer;
+  padding: .9rem 1.4rem;
+  background: var(--navy);
+  color: var(--paper);
+  border: 0;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: .7rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px -6px rgba(42,45,124,0.4);
+  transition: all .4s var(--ease);
+}
+.cookie-btn svg {
+  width: 14px; height: 14px;
+  transition: transform .4s var(--ease);
+}
+.cookie-btn:hover {
+  background: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -6px rgba(232,93,44,0.5);
+}
+.cookie-btn:hover svg { transform: scale(1.15); }
+
+@media (max-width: 720px) {
+  .cookie-banner { bottom: .8rem; }
+  .cookie-card {
+    grid-template-columns: 1fr;
+    text-align: left;
+    padding: 1.2rem 1.3rem 1.3rem;
+    gap: .9rem;
+  }
+  .cookie-icon {
+    width: 36px; height: 36px;
+  }
+  .cookie-text h3 { font-size: .98rem; }
+  .cookie-text p { font-size: .85rem; line-height: 1.5; }
+  .cookie-actions { justify-content: flex-end; }
+  .cookie-btn { padding: .85rem 1.3rem; font-size: .66rem; }
+}
+
+
 /* ============================================================
    ACCESSIBILITY — reduced motion
    ============================================================ */
