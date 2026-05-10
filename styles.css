@@ -821,22 +821,22 @@ a:hover { color: var(--orange); }
 }
 .scene-card .display { color: var(--navy); }
 
-/* ---------- Booklet shell (card + flip arrows) ---------- */
+/* ---------- Booklet shell (card + flip arrows) — fluid responsive ---------- */
 .booklet {
   position: relative;
-  margin: 3.2rem auto 1.8rem;
+  margin: clamp(2rem, 5vw, 3.5rem) auto clamp(1.2rem, 3vw, 2rem);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  max-width: 760px;
+  gap: clamp(.4rem, 1.5vw, 1.2rem);
+  max-width: clamp(320px, 92vw, 960px);
   width: 100%;
 }
 
 .menu-card {
   flex: 1 1 auto;
   width: 100%;
-  max-width: 580px;
+  max-width: clamp(280px, 82vw, 800px);
   position: relative;
   outline: none;
 }
@@ -884,8 +884,8 @@ a:hover { color: var(--orange); }
 .menu-page-card {
   flex: 0 0 calc(100% / 7);
   position: relative;
-  padding: 2.4rem 2rem 2.6rem;
-  min-height: 580px;
+  padding: clamp(1.4rem, 3vw, 2.8rem) clamp(.9rem, 2.4vw, 2.2rem) clamp(1.6rem, 3vw, 2.8rem);
+  min-height: clamp(420px, 64vh, 660px);
   display: flex;
   flex-direction: column;
 }
@@ -915,7 +915,7 @@ a:hover { color: var(--orange); }
 .menu-page-card .menu-section-head h3 {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  font-size: .95rem;
+  font-size: clamp(.82rem, 1.2vw, 1.05rem);
   color: var(--orange);
   text-transform: uppercase;
   letter-spacing: .3em;
@@ -976,7 +976,7 @@ a:hover { color: var(--orange); }
 .menu-page-card .dish {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
-  font-size: .96rem;
+  font-size: clamp(.88rem, 1.25vw, 1.06rem);
   line-height: 1.3;
   color: var(--navy);
   flex: 0 1 auto;
@@ -993,7 +993,7 @@ a:hover { color: var(--orange); }
 .menu-page-card .price {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  font-size: .96rem;
+  font-size: clamp(.88rem, 1.25vw, 1.06rem);
   color: var(--navy);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -1011,7 +1011,7 @@ a:hover { color: var(--orange); }
   margin: .25rem 0 0;
   font-family: 'Lora', Georgia, serif;
   font-style: italic;
-  font-size: .8rem;
+  font-size: clamp(.74rem, 1vw, .88rem);
   color: var(--ink-soft);
   line-height: 1.45;
   max-width: 92%;
@@ -1099,7 +1099,7 @@ a:hover { color: var(--orange); }
   filter: drop-shadow(0 4px 12px rgba(42,45,124,0.15));
 }
 .cover-emblem img {
-  width: 110px;
+  width: clamp(72px, 11vw, 140px);
   height: auto;
   display: block;
 }
@@ -1124,7 +1124,7 @@ a:hover { color: var(--orange); }
 .cover-title {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  font-size: clamp(2.2rem, 5.5vw, 3.2rem);
+  font-size: clamp(1.8rem, 5.5vw, 4rem);
   line-height: 1;
   color: var(--navy);
   text-transform: lowercase;
@@ -1147,10 +1147,10 @@ a:hover { color: var(--orange); }
   font-family: 'Lora', Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: .96rem;
+  font-size: clamp(.84rem, 1.15vw, 1.06rem);
   line-height: 1.65;
   color: var(--ink-soft);
-  max-width: 320px;
+  max-width: clamp(260px, 32vw, 380px);
   margin: 1.2rem auto .6rem;
 }
 
@@ -1179,13 +1179,11 @@ a:hover { color: var(--orange); }
   opacity: .6;
 }
 
+/* Cover scales fluidly via clamp(); only the inner padding tightens
+   on the smallest screens. */
 @media (max-width: 600px) {
-  .menu-page-card--cover { padding: 1.4rem 1rem; }
-  .cover-frame { padding: 1.5rem 1rem; }
-  .cover-emblem img { width: 84px; }
-  .cover-title { font-size: clamp(1.8rem, 7vw, 2.4rem); }
-  .cover-welcome { font-size: .88rem; max-width: 270px; }
-  .cover-signature { font-size: 1.1rem; }
+  .cover-frame { padding: clamp(1rem, 3vw, 1.6rem) clamp(.7rem, 2.5vw, 1.2rem); }
+  .cover-signature { font-size: clamp(1rem, 3.6vw, 1.25rem); }
 }
 
 /* ---------- Info page (declaration + suppliers) ---------- */
@@ -1250,7 +1248,8 @@ a:hover { color: var(--orange); }
 /* ---------- Flip buttons ---------- */
 .flip-btn {
   flex: 0 0 auto;
-  width: 46px; height: 46px;
+  width: clamp(34px, 4vw, 50px);
+  height: clamp(34px, 4vw, 50px);
   border-radius: 50%;
   background: var(--paper);
   border: 1.5px solid rgba(42,45,124,0.15);
@@ -1265,7 +1264,8 @@ a:hover { color: var(--orange); }
   z-index: 6;
 }
 .flip-btn svg {
-  width: 22px; height: 22px;
+  width: clamp(16px, 2vw, 22px);
+  height: clamp(16px, 2vw, 22px);
 }
 .flip-btn:hover:not([disabled]) {
   background: var(--orange);
@@ -1368,19 +1368,13 @@ a:hover { color: var(--orange); }
   box-shadow: 0 12px 24px -6px rgba(232,93,44,0.5);
 }
 
-/* ---------- Mobile booklet ---------- */
+/* ---------- Mobile booklet — clamp() handles sizing; only the
+   data layouts need column collapse on narrow screens ---------- */
 @media (max-width: 720px) {
   .scene-card { padding: 5rem 0 4rem; }
-  .booklet { gap: .35rem; max-width: 100%; padding: 0 .25rem; }
-  .menu-card { max-width: 100%; }
-  .menu-page-card { padding: 1.8rem 1.2rem 2.2rem; min-height: 540px; }
-  .menu-page-card .menu-section-head h3 { font-size: .85rem; letter-spacing: .25em; }
-  .menu-page-card .dish, .menu-page-card .price { font-size: .92rem; }
-  .menu-page-card .dish-desc { font-size: .76rem; }
   .menu-page-card--info .declaration { grid-template-columns: 1fr; }
   .menu-page-card--info .suppliers { columns: 1; }
-  .flip-btn { width: 38px; height: 38px; }
-  .flip-btn svg { width: 18px; height: 18px; }
+  .menu-page-card .menu-section-head h3 { letter-spacing: .25em; }
 }
 
 /* ============================================================
