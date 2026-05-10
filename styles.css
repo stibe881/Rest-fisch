@@ -882,15 +882,12 @@ a:hover { color: var(--orange); }
 .menu-list { list-style: none; padding: 0; margin: 0; }
 
 .menu-item {
-  display: flex;
-  align-items: baseline;
-  gap: .7rem;
-  padding: .9rem 0;
+  display: block;
+  padding: .95rem 0;
   border-bottom: 1px dashed rgba(42,45,124,0.18);
   transition:
     padding-left .4s var(--ease),
-    background .4s var(--ease),
-    color .35s var(--ease);
+    background .4s var(--ease);
   border-radius: 2px;
   position: relative;
 }
@@ -907,49 +904,106 @@ a:hover { color: var(--orange); }
 }
 .menu-item:hover {
   padding-left: 1rem;
-  background: linear-gradient(90deg, rgba(232,93,44,0.06), transparent 80%);
+  background: linear-gradient(90deg, rgba(232,93,44,0.07), transparent 80%);
 }
 .menu-item:hover::before { height: 70%; }
 .menu-item:hover .price { color: var(--orange); }
 .menu-item:hover .dish { color: var(--orange-deep); }
 
+/* Top row of an item: dish name — leader — price */
+.menu-item-row {
+  display: flex;
+  align-items: baseline;
+  gap: .55rem;
+  width: 100%;
+}
+
 .dish {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   color: var(--navy);
-  flex-shrink: 1;
-  max-width: 75%;
+  flex: 0 1 auto;
   transition: color .35s var(--ease);
-}
-.dish small {
-  display: block;
-  font-family: 'Lora', Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: .86rem;
-  color: var(--ink-soft);
-  margin-top: .25rem;
-  letter-spacing: .01em;
+  line-height: 1.35;
 }
 
 .leader {
-  flex: 1;
+  flex: 1 1 auto;
   align-self: flex-end;
   margin-bottom: .35em;
-  border-bottom: 1.5px dotted rgba(42,45,124,0.32);
-  min-width: 24px;
+  border-bottom: 1.5px dotted rgba(42,45,124,0.34);
+  height: 0;
+  min-width: 16px;
 }
+
 .price {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  font-size: 1.06rem;
+  font-size: 1.04rem;
   color: var(--navy);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  flex: 0 0 auto;
   transition: color .35s var(--ease);
 }
-.price::before { content: 'CHF '; font-size: .65em; opacity: .55; font-weight: 500; letter-spacing: .1em; }
+.price::before {
+  content: 'CHF\00a0';
+  font-size: .62em;
+  opacity: .55;
+  font-weight: 500;
+  letter-spacing: .1em;
+}
+
+/* Description block under the row */
+.dish-desc {
+  margin: .35rem 0 0;
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: .88rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  letter-spacing: .01em;
+  max-width: 92%;
+}
+
+/* Variant rows (e.g. Cordon bleu in 3 sizes) */
+.variants {
+  list-style: none;
+  margin: .6rem 0 0 auto;
+  padding: .5rem 0 0;
+  max-width: 75%;
+  border-top: 1px dashed rgba(42,45,124,0.16);
+}
+.variants li {
+  display: flex;
+  align-items: baseline;
+  gap: .55rem;
+  padding: .3rem 0;
+}
+.size {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  min-width: 60px;
+  flex: 0 0 auto;
+}
+.vleader {
+  flex: 1 1 auto;
+  align-self: flex-end;
+  margin-bottom: .3em;
+  border-bottom: 1px dotted rgba(42,45,124,0.24);
+  height: 0;
+  min-width: 16px;
+}
+.variants .price {
+  font-size: .98rem;
+  font-weight: 700;
+}
 
 .badge {
   display: inline-block;
@@ -967,14 +1021,87 @@ a:hover { color: var(--orange); }
   box-shadow: 0 2px 8px -2px rgba(232,93,44,0.5);
 }
 
-.menu-foot {
+.signature {
+  font-family: 'Pacifico', cursive;
+  color: var(--orange);
+  font-size: 1.4rem;
+  font-style: normal;
+  display: inline-block;
+  margin-top: .4rem;
+  line-height: 1;
+}
+
+/* Foot meta block: disclaimer · declaration · PDF download */
+.menu-meta {
+  margin-top: 2.8rem;
+  padding-top: 2rem;
+  border-top: 1px dashed rgba(42,45,124,0.2);
   text-align: center;
-  margin-top: 2.5rem;
+}
+.menu-foot {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   color: var(--ink-soft);
-  font-size: 1rem;
-  letter-spacing: .04em;
+  font-size: .98rem;
+  letter-spacing: .02em;
+  margin: 0 auto 1.6rem;
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.declaration {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: .4rem 2rem;
+  margin: 1.6rem auto 2rem;
+  max-width: 880px;
+  text-align: left;
+}
+.declaration > div {
+  display: flex;
+  align-items: baseline;
+  gap: .8rem;
+  padding: .45rem 0;
+  border-bottom: 1px dotted rgba(42,45,124,0.18);
+}
+.declaration dt {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  min-width: 80px;
+  flex: 0 0 auto;
+}
+.declaration dd {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: .9rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.pdf-link {
+  display: inline-block;
+  margin-top: 1.4rem;
+  padding: .95rem 1.9rem;
+  background: var(--navy);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: .76rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  transition: background .4s var(--ease), transform .4s var(--ease), box-shadow .4s var(--ease);
+  box-shadow: 0 6px 20px -6px rgba(42,45,124,0.4);
+}
+.pdf-link:hover {
+  background: var(--orange);
+  color: var(--paper);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px -6px rgba(232,93,44,0.45);
 }
 
 /* Tilt the card slightly on hover for tactile feel */
