@@ -39,8 +39,8 @@
   }));
 
   const depthStacks = Array.from(document.querySelectorAll('.depth-stack'));
-  const heroTitleWords = document.querySelectorAll('.hero-title .word');
-  const heroSection    = document.getElementById('hero');
+  const heroLogo    = document.querySelector('.hero-logo');
+  const heroSection = document.getElementById('hero');
 
   let scrollY = window.scrollY;
   let ticking = false;
@@ -110,18 +110,15 @@
       if (front) front.style.transform = `translate3d(${(t - .5) * 22}px, ${(t - .5) * 50}px, 0) scale(${1 + t * 0.04})`;
     });
 
-    /* --- Hero title: zoom + parallax-out as you scroll ------- */
-    if (heroSection) {
+    /* --- Hero logo: zoom + parallax-out as you scroll -------- */
+    if (heroSection && heroLogo) {
       const rect = heroSection.getBoundingClientRect();
       const p = Math.min(1, Math.max(0, -rect.top / rect.height));
-      heroTitleWords.forEach((w, i) => {
-        const factor = 1 + i * 0.15;
-        const scale  = 1 + p * 0.6 * factor;
-        const ty     = -p * 80 * factor;
-        const op     = 1 - p * 1.4;
-        w.style.transform = `translate3d(0, ${ty}px, 0) scale(${scale})`;
-        w.style.opacity = Math.max(0, op);
-      });
+      const scale = 1 + p * 0.5;
+      const ty    = -p * 100;
+      const op    = 1 - p * 1.4;
+      heroLogo.style.transform = `translate3d(0, ${ty}px, 0) scale(${scale})`;
+      heroLogo.style.opacity = Math.max(0, op);
     }
 
     ticking = false;

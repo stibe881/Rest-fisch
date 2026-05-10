@@ -7,7 +7,8 @@
   <meta name="description" content="Restaurant Fisch Fischbach — feine Menüs aus gut bürgerlicher Küche. Hauptstrasse 9, 6145 Fischbach." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -17,7 +18,9 @@
 
   <!-- Floating nav -->
   <nav class="nav">
-    <a href="#hero" class="nav-brand">FISCH<span>·</span>FISCHBACH</a>
+    <a href="#hero" class="nav-brand">
+      <img src="assets/logo.png" alt="Restaurant Fisch Fischbach" />
+    </a>
     <ul class="nav-links">
       <li><a href="#welcome">Willkommen</a></li>
       <li><a href="#philosophy">Philosophie</a></li>
@@ -43,11 +46,7 @@
 
     <div class="hero-content">
       <p class="eyebrow" data-reveal>Hauptstrasse 9 · 6145 Fischbach</p>
-      <h1 class="hero-title" data-zoom>
-        <span class="word">Restaurant</span>
-        <span class="word italic">Fisch</span>
-        <span class="word">Fischbach</span>
-      </h1>
+      <img src="assets/logo.png" alt="Restaurant Fisch Fischbach" class="hero-logo" data-zoom />
       <p class="hero-tag" data-reveal data-delay="200">Feine Menüs aus unserer gut bürgerlichen Küche.</p>
       <a href="#welcome" class="hero-arrow" aria-label="Weiterscrollen">
         <span></span>
@@ -69,13 +68,15 @@
     </div>
 
     <div class="welcome-content">
-      <h2 class="display" data-reveal>
+      <p class="kicker" data-reveal>— Herzlich Willkommen</p>
+      <h2 class="display" data-reveal data-delay="100">
         <em>Gerne</em> verwöhnen<br/>wir <em>Sie.</em>
       </h2>
-      <p class="lead" data-reveal data-delay="200">
+      <p class="lead" data-reveal data-delay="250">
         Ein Ort am Wasser, an dem traditionelle Schweizer Küche auf
         herzliche Gastfreundschaft trifft. Wir freuen uns auf Sie.
       </p>
+      <span class="divider" data-reveal data-delay="400">Reservationen erwünscht</span>
     </div>
   </section>
 
