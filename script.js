@@ -516,19 +516,63 @@
   });
 
   /* -----------------------------------------------------------
-   * 10. Mittagsmenü pop-up — opens on every visit
-   *     + marks today's row if the visit date matches a menu day
+   * 10. Mittagsmenü pop-up + floating "peek" chip
+   *     - auto-opens on every visit
+   *     - marks today's row if the visit date matches a menu day
+   *     - once the user dismisses it, a small chip slides in from
+   *       the right with the day's dish, click reopens the modal
    * --------------------------------------------------------- */
   const lunchModal = document.getElementById('modal-mittagsmenu');
+  const lunchPeek  = document.getElementById('lunch-peek');
+  const lunchPeekSub = lunchPeek ? lunchPeek.querySelector('.lunch-peek-sub') : null;
+
   if (lunchModal) {
+    // Mark today's row
     const today = new Date();
     const todayIso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    let todayDishName = '';
     lunchModal.querySelectorAll('.lunch-day').forEach((day) => {
-      if (day.dataset.date === todayIso) day.classList.add('is-today');
+      if (day.dataset.date === todayIso) {
+        day.classList.add('is-today');
+        const dishStrong = day.querySelector('.lunch-dish strong');
+        if (dishStrong) todayDishName = dishStrong.textContent.trim();
+      }
     });
+    // Sub-label on the peek chip
+    if (lunchPeekSub) {
+      lunchPeekSub.textContent = todayDishName ? 'heute · ' + todayDishName : 'diese Woche';
+    }
 
-    // Always open on page load (give the page a moment to settle)
-    setTimeout(() => openModal('mittagsmenu'), 800);
+    function showLunchPeek() {
+      if (!lunchPeek) return;
+      lunchPeek.hidden = false;
+      requestAnimationFrame(() => lunchPeek.classList.add('is-visible'));
+    }
+    function hideLunchPeek() {
+      if (!lunchPeek) return;
+      lunchPeek.classList.remove('is-visible');
+      setTimeout(() => { lunchPeek.hidden = true; }, 800);
+    }
+
+    // Watch the lunch modal: when it closes (and has been open at least once),
+    // show the peek chip; when it opens, hide the chip.
+    let modalHasBeenOpened = false;
+    const obs = new MutationObserver(() => {
+      if (lunchModal.hidden) {
+        if (modalHasBeenOpened) showLunchPeek();
+      } else {
+        modalHasBeenOpened = true;
+        hideLunchPeek();
+      }
+    });
+    obs.observe(lunchModal, { attributes: true, attributeFilter: ['hidden'] });
+
+    if (lunchPeek) {
+      lunchPeek.addEventListener('click', () => openModal('mittagsmenu'));
+    }
+
+    // Auto-open on every visit (give the page a beat to settle)
+    setTimeout(() => openModal('mittagsmenu'), 900);
   }
 
   /* -----------------------------------------------------------
