@@ -516,28 +516,29 @@
   });
 
   /* -----------------------------------------------------------
-   * 10. Mittagsmenü pop-up — auto-open once per session
-   *     + mark today's row if the visit date matches a menu day
+   * 10. Mittagsmenü pop-up — opens on every visit
+   *     + marks today's row if the visit date matches a menu day
    * --------------------------------------------------------- */
   const lunchModal = document.getElementById('modal-mittagsmenu');
   if (lunchModal) {
-    // Today badge
     const today = new Date();
     const todayIso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
     lunchModal.querySelectorAll('.lunch-day').forEach((day) => {
       if (day.dataset.date === todayIso) day.classList.add('is-today');
     });
 
-    // Auto-open once per session
-    const LUNCH_KEY = 'fisch-lunch-shown';
-    let alreadyShown = false;
-    try { alreadyShown = sessionStorage.getItem(LUNCH_KEY) === '1'; } catch (_) {}
-    if (!alreadyShown) {
-      // Wait until first paint, then open
-      setTimeout(() => {
-        openModal('mittagsmenu');
-        try { sessionStorage.setItem(LUNCH_KEY, '1'); } catch (_) {}
-      }, 800);
-    }
+    // Always open on page load (give the page a moment to settle)
+    setTimeout(() => openModal('mittagsmenu'), 800);
   }
+
+  /* -----------------------------------------------------------
+   * 11. Anchor links inside a modal close the modal first, so the
+   *     user actually sees what they navigated to (e.g. the
+   *     "Jetzt reservieren" link in the Mittagsmenü → #reservation).
+   * --------------------------------------------------------- */
+  modals.forEach((m) => {
+    m.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', () => closeModal(m));
+    });
+  });
 })();
