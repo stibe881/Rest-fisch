@@ -52,6 +52,81 @@ body {
 a { color: inherit; text-decoration: none; transition: color .4s var(--ease); }
 a:hover { color: var(--orange); }
 
+/* ============================================================
+   ACCESSIBILITY  (WCAG 2.2)
+   ============================================================ */
+
+/* Screen-reader-only text */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip-link (SC 2.4.1 Bypass Blocks) */
+.skip-link {
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translate(-50%, -120%);
+  margin-top: 1rem;
+  padding: .85rem 1.4rem;
+  background: var(--navy);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: .8rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  z-index: 1000;
+  box-shadow: 0 8px 24px -8px rgba(0,0,0,0.4);
+  transition: transform .3s var(--ease);
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+/* main wrapper — must be reachable for skip-link */
+main:focus { outline: none; }
+
+/* Visible keyboard focus everywhere (SC 2.4.7, 2.4.11) */
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+.form-field input:focus-visible,
+.form-field select:focus-visible,
+.form-field textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(232,93,44,0.25);
+}
+.menu-card:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+/* aria-invalid visual feedback */
+.form-field input[aria-invalid="true"],
+.form-field select[aria-invalid="true"],
+.form-field textarea[aria-invalid="true"] {
+  border-color: var(--orange);
+  background: rgba(232,93,44,0.07);
+}
+
 /* ------------------ Scroll progress rail ------------------ */
 .scroll-progress {
   position: fixed; top: 0; left: 0; right: 0;
@@ -552,13 +627,13 @@ a:hover { color: var(--orange); }
 .cards {
   margin-top: 4rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.4rem;
   text-align: left;
 }
 .card {
   position: relative;
-  padding: 2.6rem 1.8rem 2rem;
+  padding: clamp(1.8rem, 2.4vw, 2.6rem) clamp(1.2rem, 2vw, 1.8rem) clamp(1.4rem, 2vw, 2rem);
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 6px;
@@ -570,6 +645,8 @@ a:hover { color: var(--orange); }
     opacity var(--t-slow) var(--ease);
   opacity: 0;
   transform: translateY(40px);
+  /* Reserve a little space at top-right so the headline never collides with .card-num */
+  min-width: 0;
 }
 .card.is-visible { opacity: 1; transform: translateY(0); }
 .card:hover {
@@ -579,18 +656,24 @@ a:hover { color: var(--orange); }
 }
 .card-num {
   position: absolute;
-  top: 1.4rem; right: 1.6rem;
+  top: 1.1rem; right: 1.2rem;
   font-family: 'Pacifico', cursive;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: var(--orange);
   line-height: 1;
 }
 .card h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.7rem;
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
   font-weight: 700;
   color: var(--paper);
   margin-bottom: .8rem;
+  margin-right: 2.6rem;          /* leave room for the .card-num in the corner */
+  line-height: 1.18;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .card p {
   font-family: 'Lora', serif;
@@ -1309,17 +1392,28 @@ a:hover { color: var(--orange); }
   gap: .55rem;
   align-items: center;
 }
+/* Tap target ≥ 24×24 px (WCAG 2.2 SC 2.5.8); visual dot is the ::before */
 .page-dot {
-  width: 9px; height: 9px;
+  width: 26px; height: 26px;
   border-radius: 50%;
   border: 0;
-  background: rgba(42,45,124,0.22);
+  background: transparent;
   cursor: pointer;
   padding: 0;
-  transition: all .3s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .3s var(--ease);
 }
-.page-dot:hover { background: var(--navy); }
-.page-dot.is-active {
+.page-dot::before {
+  content: '';
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: rgba(42,45,124,0.22);
+  transition: background .3s var(--ease), transform .3s var(--ease);
+}
+.page-dot:hover::before { background: var(--navy); }
+.page-dot.is-active::before {
   background: var(--orange);
   transform: scale(1.4);
 }
@@ -1611,24 +1705,55 @@ a:hover { color: var(--orange); }
   letter-spacing: .18em;
   text-transform: uppercase;
   cursor: pointer;
-  padding: .25rem 0;
+  padding: .5rem .4rem;          /* min-height ≥ 24 px for WCAG 2.2 */
+  min-height: 24px;
   position: relative;
   transition: color .35s var(--ease);
 }
 .foot-link::after {
   content: '';
   position: absolute;
-  left: 0; bottom: 0;
+  left: .4rem; bottom: .25rem;
   width: 0; height: 1px;
   background: var(--orange);
   transition: width .35s var(--ease);
 }
 .foot-link:hover { color: var(--orange-soft); }
-.foot-link:hover::after { width: 100%; }
+.foot-link:hover::after { width: calc(100% - .8rem); }
+
+/* Social-Media icons */
+.foot-social {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin: 0;
+  padding: 0;
+}
+.foot-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;           /* exceeds 24×24 target size */
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.6);
+  transition: all .4s var(--ease);
+}
+.foot-social-link svg {
+  width: 18px; height: 18px;
+}
+.foot-social-link:hover {
+  color: var(--paper);
+  border-color: var(--orange);
+  background: var(--orange);
+  transform: translateY(-2px);
+}
 
 @media (max-width: 600px) {
-  .foot-inner { flex-direction: column; text-align: center; gap: .9rem; }
-  .foot-links { justify-content: center; }
+  .foot-inner { flex-direction: column; text-align: center; gap: 1.1rem; }
+  .foot-links { justify-content: center; flex-wrap: wrap; }
+  .foot-social { justify-content: center; }
 }
 
 /* ----- Modal shell ----- */

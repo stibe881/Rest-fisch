@@ -9,16 +9,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=14" />
+  <link rel="stylesheet" href="styles.css?v=15" />
 </head>
 <body>
+
+  <!-- Skip link (WCAG 2.4.1) -->
+  <a href="#main" class="skip-link">Zum Hauptinhalt springen</a>
 
   <!-- Progress rail -->
   <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
 
   <!-- Floating nav -->
-  <nav class="nav">
-    <a href="#hero" class="nav-brand">
+  <nav class="nav" aria-label="Hauptnavigation">
+    <a href="#hero" class="nav-brand" aria-label="Restaurant Fisch Fischbach — Startseite">
       <img src="assets/logo.png" alt="Restaurant Fisch Fischbach" />
     </a>
 
@@ -39,6 +42,8 @@
     </ul>
   </nav>
   <div class="nav-backdrop" aria-hidden="true"></div>
+
+  <main id="main" tabindex="-1">
 
   <!-- ==================== SCENE 1 — HERO ==================== -->
   <section id="hero" class="scene scene-hero">
@@ -160,7 +165,7 @@
   <section id="speisekarte" class="scene scene-card">
     <div class="card-grain" aria-hidden="true"></div>
     <div class="card-stage">
-      <p class="kicker" data-reveal>— Speisekarte 2025</p>
+      <p class="kicker" data-reveal>— Speisekarte 2026</p>
       <h2 class="display" data-reveal data-delay="100">Aus der <em>Küche</em></h2>
 
       <div class="booklet">
@@ -174,10 +179,10 @@
 
               <!-- ─── Page 1: Vorspeisen ─── -->
               <!-- Cover -->
-              <article class="menu-page-card menu-page-card--cover" data-page="0" data-title="Speisekarte 2025">
+              <article class="menu-page-card menu-page-card--cover" data-page="0" data-title="Speisekarte 2026">
                 <div class="page-paper page-cover">
                   <div class="cover-frame">
-                    <p class="cover-eyebrow">Saison · 2025</p>
+                    <p class="cover-eyebrow">Saison · 2026</p>
                     <div class="cover-emblem">
                       <img src="assets/logo.png" alt="" />
                     </div>
@@ -593,7 +598,7 @@
           <p class="form-note">Die Anfrage wird per E-Mail an info@fischfischbach.ch gesendet.</p>
         </div>
 
-        <output class="form-status" hidden></output>
+        <output class="form-status" role="status" aria-live="polite" aria-atomic="true" hidden></output>
       </form>
     </div>
   </section>
@@ -634,9 +639,31 @@
     </div>
   </section>
 
+  </main>
+
   <footer class="foot">
     <div class="foot-inner">
       <p>© <span id="year"></span> Restaurant Fisch Fischbach · Hauptstrasse 9, 6145 Fischbach</p>
+
+      <ul class="foot-social" aria-label="Folge uns auf Social Media">
+        <li>
+          <a href="https://www.facebook.com/people/Restaurant-Fisch-Fischbach/61578570903798/" target="_blank" rel="noopener" class="foot-social-link" aria-label="Restaurant Fisch auf Facebook (öffnet in neuem Tab)">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.6 1.6-1.6h1.7V4.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V14h2.7v8h3.4z"/></svg>
+            <span class="sr-only">Facebook</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/restaurant_fisch_fischbach/" target="_blank" rel="noopener" class="foot-social-link" aria-label="Restaurant Fisch auf Instagram (öffnet in neuem Tab)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/>
+            </svg>
+            <span class="sr-only">Instagram</span>
+          </a>
+        </li>
+      </ul>
+
       <ul class="foot-links">
         <li><button type="button" class="foot-link" data-modal="impressum">Impressum</button></li>
         <li><button type="button" class="foot-link" data-modal="datenschutz">Datenschutz</button></li>
