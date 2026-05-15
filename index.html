@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=18" />
+  <link rel="stylesheet" href="styles.css?v=19" />
 </head>
 <body>
 
@@ -707,6 +707,7 @@
         <li><button type="button" class="foot-link" data-modal="impressum">Impressum</button></li>
         <li><button type="button" class="foot-link" data-modal="datenschutz">Datenschutz</button></li>
         <li><button type="button" class="foot-link" id="cookie-reopen">Cookie-Hinweis</button></li>
+        <li><button type="button" class="foot-link foot-link--admin" data-modal="admin" aria-label="Admin-Bereich öffnen">· Admin</button></li>
       </ul>
     </div>
   </footer>
@@ -969,6 +970,166 @@
     </div>
   </div>
 
-  <script src="script.js?v=18"></script>
+
+
+  <!-- ===== Modal: Event / Feiertag-Popup (admin-controlled, replaces Mittagsmenü when active) ===== -->
+  <div class="modal" id="modal-event" hidden role="dialog" aria-modal="true" aria-labelledby="event-title">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-card" role="document">
+      <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+      <div class="modal-content modal-content--event">
+        <p class="kicker" id="event-eyebrow">— Hinweis</p>
+        <h2 class="display" id="event-title">Feiertag</h2>
+        <div class="event-body" id="event-body">
+          <p>Wir haben heute geänderte Öffnungszeiten.</p>
+        </div>
+        <div class="lunch-actions">
+          <button type="button" class="form-submit" data-modal-close>
+            <span>Verstanden</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== Modal: Admin (login + content management) ===== -->
+  <div class="modal" id="modal-admin" hidden role="dialog" aria-modal="true" aria-labelledby="admin-title">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-card modal-card--wide" role="document">
+      <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+      <div class="modal-content">
+        <p class="kicker">— Verwaltung</p>
+        <h2 class="display" id="admin-title">Admin</h2>
+
+        <!-- Login view -->
+        <form class="reservation-form admin-login" id="admin-login-form" novalidate>
+          <p class="legal-lead">Bitte melden Sie sich an, um Popups und Menüs zu bearbeiten.</p>
+          <label class="form-field">
+            <span class="form-label">Passwort</span>
+            <input type="password" id="admin-password" autocomplete="current-password" required />
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="form-submit"><span>Anmelden</span></button>
+            <p class="form-status is-error" id="admin-login-error" role="status" aria-live="polite" hidden>Passwort stimmt nicht.</p>
+          </div>
+        </form>
+
+        <!-- Panel view -->
+        <form class="admin-panel" id="admin-panel-form" hidden novalidate>
+          <p class="admin-banner">
+            <strong>Hinweis:</strong> Diese Einstellungen werden nur im Browser dieses Geräts gespeichert — sie wirken sich nicht auf andere Besucher der Webseite aus.
+          </p>
+
+          <!-- Section: Mittagsmenü-Popup -->
+          <section class="admin-section">
+            <header class="admin-section-head">
+              <h3>Mittagsmenü-Popup</h3>
+              <label class="admin-toggle">
+                <input type="checkbox" id="admin-lunch-enabled" />
+                <span class="admin-toggle-switch" aria-hidden="true"></span>
+                <span class="admin-toggle-label">aktiv</span>
+              </label>
+            </header>
+
+            <div class="admin-days">
+              <div class="admin-day" data-idx="0">
+                <h4>Tag 1</h4>
+                <label><span>Wochentag</span><input type="text" data-lunch-field="weekday" /></label>
+                <label><span>Datum</span><input type="date" data-lunch-field="date" /></label>
+                <label><span>Hauptgericht</span><input type="text" data-lunch-field="dish" /></label>
+                <label><span>Beilagen</span><input type="text" data-lunch-field="desc" /></label>
+              </div>
+              <div class="admin-day" data-idx="1">
+                <h4>Tag 2</h4>
+                <label><span>Wochentag</span><input type="text" data-lunch-field="weekday" /></label>
+                <label><span>Datum</span><input type="date" data-lunch-field="date" /></label>
+                <label><span>Hauptgericht</span><input type="text" data-lunch-field="dish" /></label>
+                <label><span>Beilagen</span><input type="text" data-lunch-field="desc" /></label>
+              </div>
+              <div class="admin-day" data-idx="2">
+                <h4>Tag 3</h4>
+                <label><span>Wochentag</span><input type="text" data-lunch-field="weekday" /></label>
+                <label><span>Datum</span><input type="date" data-lunch-field="date" /></label>
+                <label><span>Hauptgericht</span><input type="text" data-lunch-field="dish" /></label>
+                <label><span>Beilagen</span><input type="text" data-lunch-field="desc" /></label>
+              </div>
+            </div>
+
+            <h4 class="admin-h4">Weitere Tagesgerichte</h4>
+            <div class="admin-extras">
+              <div class="admin-extra" data-idx="0">
+                <label><span>Gericht</span><input type="text" data-extra-field="name" /></label>
+                <label><span>Preis (CHF)</span><input type="text" data-extra-field="price" inputmode="decimal" /></label>
+                <label><span>Beilagen</span><input type="text" data-extra-field="note" /></label>
+              </div>
+              <div class="admin-extra" data-idx="1">
+                <label><span>Gericht</span><input type="text" data-extra-field="name" /></label>
+                <label><span>Preis (CHF)</span><input type="text" data-extra-field="price" inputmode="decimal" /></label>
+                <label><span>Beilagen</span><input type="text" data-extra-field="note" /></label>
+              </div>
+              <div class="admin-extra" data-idx="2">
+                <label><span>Gericht</span><input type="text" data-extra-field="name" /></label>
+                <label><span>Preis (CHF)</span><input type="text" data-extra-field="price" inputmode="decimal" /></label>
+                <label><span>Beilagen</span><input type="text" data-extra-field="note" /></label>
+              </div>
+              <div class="admin-extra" data-idx="3">
+                <label><span>Gericht</span><input type="text" data-extra-field="name" /></label>
+                <label><span>Preis (CHF)</span><input type="text" data-extra-field="price" inputmode="decimal" /></label>
+                <label><span>Beilagen</span><input type="text" data-extra-field="note" /></label>
+              </div>
+              <div class="admin-extra" data-idx="4">
+                <label><span>Gericht</span><input type="text" data-extra-field="name" /></label>
+                <label><span>Preis (CHF)</span><input type="text" data-extra-field="price" inputmode="decimal" /></label>
+                <label><span>Beilagen</span><input type="text" data-extra-field="note" /></label>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section: Event-Popup -->
+          <section class="admin-section">
+            <header class="admin-section-head">
+              <h3>Event- / Feiertags-Popup</h3>
+              <label class="admin-toggle">
+                <input type="checkbox" id="admin-event-enabled" />
+                <span class="admin-toggle-switch" aria-hidden="true"></span>
+                <span class="admin-toggle-label">aktiv</span>
+              </label>
+            </header>
+
+            <div class="form-row form-row--2">
+              <label class="form-field">
+                <span class="form-label">Eyebrow (vor dem Titel)</span>
+                <input type="text" id="admin-event-eyebrow" placeholder="— Hinweis" />
+              </label>
+              <label class="form-field">
+                <span class="form-label">Titel</span>
+                <input type="text" id="admin-event-title" placeholder="Feiertag" />
+              </label>
+            </div>
+            <label class="form-field">
+              <span class="form-label">Text (Absätze mit Leerzeile trennen)</span>
+              <textarea id="admin-event-body" rows="5" placeholder="Am Donnerstag (Auffahrt) sind wir geschlossen."></textarea>
+            </label>
+            <p class="admin-hint">Wenn aktiv, ersetzt das Event-Popup das Mittagsmenü-Popup beim Seitenstart.</p>
+          </section>
+
+          <div class="admin-actions">
+            <button type="submit" class="form-submit"><span>Änderungen speichern</span></button>
+            <button type="button" class="admin-secondary" id="admin-reset">Auf Standard zurücksetzen</button>
+            <button type="button" class="admin-secondary" id="admin-logout">Abmelden</button>
+          </div>
+          <p class="form-status" id="admin-save-status" role="status" aria-live="polite" hidden></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="script.js?v=19"></script>
 </body>
 </html>
