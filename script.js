@@ -309,26 +309,37 @@
 
   function openModal(id) {
     const m = document.getElementById('modal-' + id);
-    if (!m) return;
-    // Remember the trigger so we can restore focus on close.
+    if (!m || m.classList.contains('is-open')) return;
     modalStack.push({ modal: m, trigger: document.activeElement });
     m.hidden = false;
     document.body.classList.add('modal-open');
     m.addEventListener('keydown', trapTab);
+    // Wait two frames so the browser has time to register the
+    // initial (opacity:0, translated) state before .is-open kicks
+    // off the transition. Without this the modal jumps into place.
     requestAnimationFrame(() => {
-      const close = m.querySelector('.modal-close');
-      if (close) close.focus();
+      requestAnimationFrame(() => {
+        m.classList.add('is-open');
+      });
     });
+    // Focus the close button after the entrance has settled.
+    setTimeout(() => {
+      const close = m.querySelector('.modal-close');
+      if (close) close.focus({ preventScroll: true });
+    }, 320);
   }
 
   function closeModal(m) {
-    if (!m || m.hidden) return;
-    m.hidden = true;
+    if (!m || (m.hidden && !m.classList.contains('is-open'))) return;
+    m.classList.remove('is-open');
     m.removeEventListener('keydown', trapTab);
-    if (!document.querySelector('.modal:not([hidden])')) {
-      document.body.classList.remove('modal-open');
-    }
-    // Restore focus to whatever opened this modal.
+    // Hide AFTER the exit transition so the fade is visible.
+    setTimeout(() => {
+      m.hidden = true;
+      if (!document.querySelector('.modal.is-open')) {
+        document.body.classList.remove('modal-open');
+      }
+    }, 560);
     const entry = modalStack.pop();
     if (entry && entry.trigger && typeof entry.trigger.focus === 'function') {
       try { entry.trigger.focus({ preventScroll: true }); } catch (_) { entry.trigger.focus(); }
@@ -554,18 +565,18 @@
       setTimeout(() => { lunchPeek.hidden = true; }, 800);
     }
 
-    // Watch the lunch modal: when it closes (and has been open at least once),
-    // show the peek chip; when it opens, hide the chip.
+    // Watch the lunch modal's .is-open class: chip shows AFTER the
+    // modal has been opened at least once, then closed.
     let modalHasBeenOpened = false;
     const obs = new MutationObserver(() => {
-      if (lunchModal.hidden) {
-        if (modalHasBeenOpened) showLunchPeek();
-      } else {
+      if (lunchModal.classList.contains('is-open')) {
         modalHasBeenOpened = true;
         hideLunchPeek();
+      } else if (modalHasBeenOpened) {
+        showLunchPeek();
       }
     });
-    obs.observe(lunchModal, { attributes: true, attributeFilter: ['hidden'] });
+    obs.observe(lunchModal, { attributes: true, attributeFilter: ['class'] });
 
     if (lunchPeek) {
       lunchPeek.addEventListener('click', () => openModal('mittagsmenu'));
