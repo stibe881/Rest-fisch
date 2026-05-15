@@ -515,16 +515,41 @@
 
   /* -----------------------------------------------------------
    * 9. Land on hero on every fresh visit
-   *    (suppress browser scroll-restoration to last position)
+   *    Mobile browsers (iOS Safari, Android Chrome bfcache) tend to
+   *    restore the previous scroll position even with
+   *    scrollRestoration=manual set in <head>. We listen on
+   *    DOMContentLoaded, load AND pageshow (which fires when the page
+   *    comes back from the bfcache), and we temporarily disable
+   *    scroll-behavior:smooth so the reset is instant.
    * --------------------------------------------------------- */
   if ('scrollRestoration' in window.history) {
     window.history.scrollRestoration = 'manual';
   }
-  window.addEventListener('load', () => {
-    if (!window.location.hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-    }
-  });
+
+  function forceTop() {
+    const html = document.documentElement;
+    const previousBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    try { window.scrollTo(0, 0); } catch (_) {}
+    if (html) html.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+    // Restore smooth scrolling on the next frame so legitimate anchor
+    // clicks still glide.
+    requestAnimationFrame(() => {
+      html.style.scrollBehavior = previousBehavior;
+    });
+  }
+
+  function maybeResetScroll() {
+    if (window.location.hash) return;  // honor real deep-links
+    forceTop();
+  }
+
+  // Fire on every relevant lifecycle moment.
+  maybeResetScroll();                                      // immediate
+  document.addEventListener('DOMContentLoaded', maybeResetScroll);
+  window.addEventListener('load', maybeResetScroll);
+  window.addEventListener('pageshow', maybeResetScroll);   // bfcache return
 
   /* -----------------------------------------------------------
    * 10. Mittagsmenü pop-up + floating "peek" chip
