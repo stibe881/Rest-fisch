@@ -665,6 +665,7 @@
       </ul>
 
       <ul class="foot-links">
+        <li><button type="button" class="foot-link" data-modal="mittagsmenu">Mittagsmenü</button></li>
         <li><button type="button" class="foot-link" data-modal="impressum">Impressum</button></li>
         <li><button type="button" class="foot-link" data-modal="datenschutz">Datenschutz</button></li>
         <li><button type="button" class="foot-link" id="cookie-reopen">Cookie-Hinweis</button></li>
@@ -851,6 +852,85 @@
     </div>
   </div>
 
-  <script src="script.js?v=12"></script>
+
+  <!-- ===== Modal: Mittagsmenü (opens automatically on first visit per session) ===== -->
+  <div class="modal" id="modal-mittagsmenu" hidden role="dialog" aria-modal="true" aria-labelledby="mittagsmenu-title">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-card" role="document">
+      <button class="modal-close" type="button" aria-label="Schliessen" data-modal-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+      <div class="modal-content modal-content--lunch">
+        <p class="kicker">— diese Woche</p>
+        <h2 class="display" id="mittagsmenu-title">Mittags&shy;menü</h2>
+        <p class="legal-lead">Tagesmenü mit Suppe &amp; Salat — Fr.&nbsp;19.50</p>
+
+        <ul class="lunch-list">
+          <li class="lunch-day" data-date="2026-05-11">
+            <header class="lunch-day-head">
+              <span class="lunch-weekday">Montag</span>
+              <time class="lunch-date" datetime="2026-05-11">11.05.2026</time>
+            </header>
+            <p class="lunch-dish"><strong>Rinds Stroganoff</strong><br/>Spätzli · Gemüse</p>
+          </li>
+          <li class="lunch-day" data-date="2026-05-14">
+            <header class="lunch-day-head">
+              <span class="lunch-weekday">Donnerstag</span>
+              <time class="lunch-date" datetime="2026-05-14">14.05.2026</time>
+            </header>
+            <p class="lunch-dish"><strong>Brät Cordon bleu</strong><br/>Bratkartoffeln · Gemüse</p>
+          </li>
+          <li class="lunch-day" data-date="2026-05-15">
+            <header class="lunch-day-head">
+              <span class="lunch-weekday">Freitag</span>
+              <time class="lunch-date" datetime="2026-05-15">15.05.2026</time>
+            </header>
+            <p class="lunch-dish"><strong>Brät Cordon bleu</strong><br/>Bratkartoffeln · Gemüse</p>
+          </li>
+        </ul>
+
+        <h3 class="lunch-section-title">Weitere Tagesgerichte</h3>
+        <ul class="lunch-extras">
+          <li>
+            <div class="lunch-row"><span class="lunch-name">Heisse Hamme</span><span class="lunch-leader" aria-hidden="true"></span><span class="lunch-price">22.50</span></div>
+            <p class="lunch-note">Fitnessteller</p>
+          </li>
+          <li>
+            <div class="lunch-row"><span class="lunch-name">Schweinsschnitzel paniert</span><span class="lunch-leader" aria-hidden="true"></span><span class="lunch-price">25.50</span></div>
+            <p class="lunch-note">Pommes frites · Gemüse</p>
+          </li>
+          <li>
+            <div class="lunch-row"><span class="lunch-name">Frühlingsrollen Süsssauer</span><span class="lunch-leader" aria-hidden="true"></span><span class="lunch-price">23.50</span></div>
+            <p class="lunch-note">Fitnessteller</p>
+          </li>
+          <li>
+            <div class="lunch-row"><span class="lunch-name">Spargeln Hollandaise</span><span class="lunch-leader" aria-hidden="true"></span><span class="lunch-price">25.50</span></div>
+            <p class="lunch-note">Bratkartoffeln</p>
+          </li>
+          <li>
+            <div class="lunch-row"><span class="lunch-name">Poulet-Flügeli Haussauce</span><span class="lunch-leader" aria-hidden="true"></span><span class="lunch-price">22.50</span></div>
+            <p class="lunch-note">Pommes frites</p>
+          </li>
+        </ul>
+
+        <p class="legal-meta">
+          Allergeninfos auf Anfrage · Herkunftsland Brot: Schweiz (Toastbrot Romers, A) ·
+          Preise in CHF inkl. 8.1&nbsp;% MwSt.
+        </p>
+
+        <div class="lunch-actions">
+          <button type="button" class="form-submit" data-modal-close>
+            <span>Schliessen</span>
+          </button>
+          <button type="button" class="lunch-link" data-modal="reservation" id="lunch-to-reservation">
+            <span>Tisch reservieren</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=15"></script>
 </body>
 </html>

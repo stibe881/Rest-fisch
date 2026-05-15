@@ -268,48 +268,96 @@
   }
 
   /* -----------------------------------------------------------
-   * 6b. Legal modals (Impressum / Datenschutz)
+   * 6b. Modals with WCAG focus management
+   *     (Impressum · Datenschutz · Speisekarte · Reservation · Mittagsmenü)
    * --------------------------------------------------------- */
   const modalTriggers = document.querySelectorAll('[data-modal]');
   const modals = document.querySelectorAll('.modal');
+  const modalStack = []; // remembers which element to refocus when each modal closes
+
+  const FOCUSABLE = [
+    'a[href]:not([tabindex="-1"])',
+    'button:not([disabled]):not([tabindex="-1"])',
+    'input:not([disabled]):not([type="hidden"]):not([tabindex="-1"])',
+    'select:not([disabled]):not([tabindex="-1"])',
+    'textarea:not([disabled]):not([tabindex="-1"])',
+    '[tabindex]:not([tabindex="-1"])',
+  ].join(',');
+
+  function getFocusable(container) {
+    return Array.from(container.querySelectorAll(FOCUSABLE)).filter((el) => {
+      // visible & not aria-hidden
+      return el.offsetParent !== null && !el.closest('[aria-hidden="true"]');
+    });
+  }
+
+  function trapTab(e) {
+    if (e.key !== 'Tab') return;
+    const m = e.currentTarget;
+    const focusables = getFocusable(m);
+    if (!focusables.length) { e.preventDefault(); return; }
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
 
   function openModal(id) {
     const m = document.getElementById('modal-' + id);
     if (!m) return;
+    // Remember the trigger so we can restore focus on close.
+    modalStack.push({ modal: m, trigger: document.activeElement });
     m.hidden = false;
     document.body.classList.add('modal-open');
-    // Focus the close button after transition for accessibility
+    m.addEventListener('keydown', trapTab);
     requestAnimationFrame(() => {
       const close = m.querySelector('.modal-close');
       if (close) close.focus();
     });
   }
+
   function closeModal(m) {
-    if (!m) return;
+    if (!m || m.hidden) return;
     m.hidden = true;
+    m.removeEventListener('keydown', trapTab);
     if (!document.querySelector('.modal:not([hidden])')) {
       document.body.classList.remove('modal-open');
     }
-  }
-  function closeAllModals() {
-    modals.forEach((m) => closeModal(m));
+    // Restore focus to whatever opened this modal.
+    const entry = modalStack.pop();
+    if (entry && entry.trigger && typeof entry.trigger.focus === 'function') {
+      try { entry.trigger.focus({ preventScroll: true }); } catch (_) { entry.trigger.focus(); }
+    }
   }
 
   modalTriggers.forEach((btn) => {
     btn.addEventListener('click', (e) => {
       const id = btn.dataset.modal;
-      if (id) { e.preventDefault(); openModal(id); }
+      if (!id) return;
+      e.preventDefault();
+      // If we're inside another modal that contains this trigger, close it first
+      // so the back-link feels like a transition, not a stack of overlays.
+      const enclosingOpenModal = btn.closest('.modal:not([hidden])');
+      if (enclosingOpenModal) closeModal(enclosingOpenModal);
+      openModal(id);
     });
   });
+
   modals.forEach((m) => {
     m.querySelectorAll('[data-modal-close]').forEach((el) => {
       el.addEventListener('click', () => closeModal(m));
     });
   });
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.querySelector('.modal:not([hidden])')) {
-      closeAllModals();
-    }
+    if (e.key !== 'Escape') return;
+    const open = document.querySelector('.modal:not([hidden])');
+    if (open) closeModal(open);
   });
 
   /* -----------------------------------------------------------
@@ -336,6 +384,15 @@
       status.classList.toggle('is-error', !!isError);
     }
 
+    // Clear aria-invalid as soon as the user starts correcting a field.
+    resForm.querySelectorAll('input, select, textarea').forEach((field) => {
+      field.addEventListener('input', () => {
+        if (field.value && field.value.toString().trim()) {
+          field.setAttribute('aria-invalid', 'false');
+        }
+      });
+    });
+
     resForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const data = new FormData(resForm);
@@ -347,8 +404,20 @@
       const phone  = (data.get('phone')  || '').trim();
       const notes  = (data.get('notes')  || '').trim();
 
-      if (!date || !time || !guests || !name || !email || !phone) {
+      // Mark missing fields with aria-invalid (WCAG SC 3.3.1)
+      const fieldsRequired = { date, time, guests, name, email, phone };
+      let firstInvalid = null;
+      Object.entries(fieldsRequired).forEach(([key, value]) => {
+        const field = resForm.querySelector(`[name="${key}"]`);
+        if (!field) return;
+        const invalid = !value;
+        field.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+        if (invalid && !firstInvalid) firstInvalid = field;
+      });
+
+      if (firstInvalid) {
         showStatus('Bitte füllen Sie alle Pflichtfelder aus.', true);
+        try { firstInvalid.focus({ preventScroll: false }); } catch (_) { firstInvalid.focus(); }
         return;
       }
 
@@ -432,4 +501,43 @@
     document.body.classList.add('is-loaded');
     update();
   });
+
+  /* -----------------------------------------------------------
+   * 9. Land on hero on every fresh visit
+   *    (suppress browser scroll-restoration to last position)
+   * --------------------------------------------------------- */
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+  }
+  window.addEventListener('load', () => {
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
+  });
+
+  /* -----------------------------------------------------------
+   * 10. Mittagsmenü pop-up — auto-open once per session
+   *     + mark today's row if the visit date matches a menu day
+   * --------------------------------------------------------- */
+  const lunchModal = document.getElementById('modal-mittagsmenu');
+  if (lunchModal) {
+    // Today badge
+    const today = new Date();
+    const todayIso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    lunchModal.querySelectorAll('.lunch-day').forEach((day) => {
+      if (day.dataset.date === todayIso) day.classList.add('is-today');
+    });
+
+    // Auto-open once per session
+    const LUNCH_KEY = 'fisch-lunch-shown';
+    let alreadyShown = false;
+    try { alreadyShown = sessionStorage.getItem(LUNCH_KEY) === '1'; } catch (_) {}
+    if (!alreadyShown) {
+      // Wait until first paint, then open
+      setTimeout(() => {
+        openModal('mittagsmenu');
+        try { sessionStorage.setItem(LUNCH_KEY, '1'); } catch (_) {}
+      }, 800);
+    }
+  }
 })();
